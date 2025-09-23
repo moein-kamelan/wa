@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import url("./fonts.css");
+
+@theme {
+  --color-primary : #25D366;
+  --color-secondary : #075E54;
+  --color-accent : #34B7F1;
+  --color-neutral-primary : #DCF8C6;
+  --color-neutral-secondary : #ECE5DD;
+  --color-neutral-tertiary : #D9D9D9;
+  --color-btn-primary-normal : #25D366;
+  --color-btn-primary-hover : #29EF73;
+  --color-btn-primary-tapped : #1DA450;
+  --color-btn-primary-disable : #E0E0E0;
+--color-semantic-success : #4CAF50;
+--color-semantic-error : #F44336;
+--color-semantic-warning : #FFC107;
+--color-semantic-accent : #34B7F1;
+
+
+  
+  
+    --font-B-Nazanin : "B-Nazanin";
+    --font-B-Homa : "B-Homa";
+
+    --breakpoint-mobile : 412px;
+    --breakpoint-tablet : 834px;
+    --breakpoint-desktop : 1440px;
+
+
+}
+:root {
+    direction: rtl;
+}
+
+body {
+    font-family: "B-Homa";
+    
+}
+
+.btn-shadow {
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
