@@ -1,0 +1,74 @@
+import React from "react";
+
+function Step3() {
+  return (
+    <div className="mx-auto w-[88%] ">
+      <div className="   rounded-[20px] bg-[#EEEEEE] mt-6.5 lg:mt-8   overflow-y-auto pt-12  h-[560px] lg:h-[600px] ">
+        <div className="w-[67.4%] h-[484px] rounded-2xl mx-auto shadow-[1px_2px_15px_0_rgba(0,0,0,0.25)] flex flex-col pt-6 px-4.5 bg-[##FFFEFE2B]/17 pb-9">
+          <label className="shrink-0 bg-[#f8f7f7] border border-[#CFCFCF] border-dashed rounded-2xl h-[339px] flex flex-col items-center justify-center gap-8 cursor-pointer mb-8 px-12">
+            <input type="file" className="" />
+
+            <svg
+              width="93"
+              height="93"
+              viewBox="0 0 93 93"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M46.2728 30.8483V7.71191L38.5607 15.424"
+                stroke="#292D32"
+                strokeWidth="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M46.2728 7.71191L53.9849 15.424"
+                stroke="#292D32"
+                strokeWidth="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M26.9925 46.2729C11.5682 46.2729 11.5682 53.1753 11.5682 61.6972V65.5533C11.5682 76.196 11.5682 84.8336 30.8485 84.8336H61.6971C77.1213 84.8336 80.9774 76.196 80.9774 65.5533V61.6972C80.9774 53.1753 80.9774 46.2729 65.5531 46.2729C61.6971 46.2729 60.6174 47.0827 58.6122 48.5866L54.679 52.7511C50.1289 57.6098 42.4167 57.6098 37.828 52.7511L33.9334 48.5866C31.9282 47.0827 30.8485 46.2729 26.9925 46.2729Z"
+                stroke="#292D32"
+                strokeWidth="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M19.2803 46.2727V38.5605C19.2803 30.8099 19.2803 24.4088 30.8485 23.2905"
+                stroke="#292D32"
+                strokeWidth="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M73.2652 46.2727V38.5605C73.2652 30.8099 73.2652 24.4088 61.6971 23.2905"
+                stroke="#292D32"
+                strokeWidth="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div className="flex flex-col items-center justify-center gap-2 text-center font-B-Nazanin">
+              <span className="text-4xl">
+                برای آپلود فایل را بکشید و رها کنید.
+              </span>
+              <span className="text-4xl text-accent underline underline-offset-12 !font-B-Nazanin">
+                و یا از اینجا انتخاب کنید
+              </span>
+            </div>
+          </label>
+
+          <span className="text-[32px] ">در انتظار فایل ...</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Step3;

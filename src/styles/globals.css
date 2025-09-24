@@ -16,6 +16,7 @@
 --color-semantic-error : #F44336;
 --color-semantic-warning : #FFC107;
 --color-semantic-accent : #34B7F1;
+--color-gray-black : #404040;
 
 
   
@@ -36,6 +37,10 @@
 body {
     font-family: "B-Homa";
     
+}
+
+button {
+    cursor: pointer;
 }
 
 .btn-shadow {

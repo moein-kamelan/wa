@@ -1,84 +1,70 @@
 import React, { useState } from 'react'
 import Stepper from '../../../components/templates/Dashboard/NewCapmain/Stepper/Stepper'
 import Step1 from '../../../components/templates/Dashboard/NewCapmain/Step1/Step1'
- import { Formik, Form, Field, ErrorMessage } from "formik";
- import * as Yup from 'yup';
-
- 
-  const stepSchemas = [
-  Yup.object({
-    message: Yup.string().required("ابتدا پیام متنی کمپین خود را ایجاد کنید."),
-  }),
- 
-];
-
-
-
+import StepMessage from '../../../components/modules/Dashboard/StepMessage/StepMessage'
+import Step2 from '../../../components/templates/Dashboard/NewCapmain/Step2/Step2'
+import Step3 from '../../../components/templates/Step3/Step3'
+import StepButtons from '../../../components/modules/Dashboard/StepButtons/StepButtons'
 
 function NewCampain() {
+  const [message , setMessage] = useState("")
+  const [step , setStep] = useState(1)
+  const [step1Error , setStep1Error] = useState<null | string>(null)
+  const isLastStep = step === 7
+  const isFirstStep = step === 1
+  const existError = step1Error !== null
+  const [checkedVariables , setCheckedVaribale] = useState({
+    firstName : false,
+    lastName : false ,
+    link : false , 
+    date : false , 
+    number : false , 
+    company : false , 
+    discount : false , 
+    trackingCode : false , 
+  })
 
+
+    const handleNextClick = () => {
+      if(message.trim() !== "") {
+        setStep(s => s + 1)
+      }else {
+        setStep1Error("ابتدا پیام متنی کمپین خود را ایجاد کنید.")
+        setTimeout(() => {
+        setStep1Error(null)
+          
+        }, 3000);
+      }
+      
+
+
+  }
   
 
-   const [step, setStep] = useState(1);
-   const [message , setMessage] = useState("")
-
-  const initialValues = { name: "", email: "" };
-  const isLastStep = step === stepSchemas.length - 1;
-
-  const handleSubmit = (value : any) => {
-    console.log("value => " , value);
+  const handleSubmitClick = () => {
     
   }
-
-  const handleNext = async (value : any , actions : any ) => {
-    try {
-      await stepSchemas[step].validate(value )
-      setStep(prevStep => prevStep + 1)
-      
-    } catch (error : any) {
-      
-    }
-    
-  }
-  
 
   return (
+    <div>
+      <Stepper step={step}/>
 
-               <div>
-      <Stepper/>
+      <div className='mr-[22px] max-lg:mr-[62px] ml-[57px] max-w-[93%]   '>
+     <div className='rounded-2xl bg-white md:h-[79.5vh] overflow-y-auto pb-9  md:pb-10  relative'>
+    {step1Error && <StepMessage status='error'>{step1Error}</StepMessage>}
 
-      <div className='mr-[22px] w-[93%]   '>
-     <div className='rounded-2xl bg-white h-[79.5vh] overflow-y-auto pb-10'>
-       <button className='mr-4.5 mt-[11px] text-[25px] w-[136px] h-10 text-white rounded-[55px] btn-shadow bg-semantic-error'>حذف کمپین</button>
-    
-    
 
-       <Formik
-      initialValues={initialValues}
-      validationSchema={stepSchemas[step]} // این باعث میشه هر مرحله فقط فیلدهای خودش رو چک کنه
-      onSubmit={(values, actions) => {
-        if (isLastStep) {
-          handleSubmit(values);
-        } else {
-          handleNext(values, actions);
-        }
-      }}
-    >
-      {() => (
-        <Form className="">
-        <Step1 message={message} onMessageChange={setMessage}/>          
-        </Form>
-    
-      )}
-    </Formik>
-    
+      
+       <button className={`  mt-2 mr-4 lg:mr-4.5 lg:mt-[11px] text-2xl/6 lg:text-[25px] w-[122px] h-[33px] lg:w-[136px] lg:h-10 text-white rounded-[55px] btn-shadow bg-semantic-error ${existError && "invisible"} ${isFirstStep ? "disabled:bg-transparent !text-gray-black !bg-neutral-tertiary border !border-gray-black   cursor-not-allowed" : ""}`}>حذف کمپین</button>
 
-         </div>
-
-     <div className='flex items-center justify-between mt-4'>
-    <button className='text-white bg-btn-primary-normal hover:bg-btn-primary-hover active:bg-btn-primary-tapped w-[130px] h-10 rounded-[55px] text-[32px]/8 btn-shadow '>قبلی</button>
-    <button className='text-white bg-btn-primary-normal hover:bg-btn-primary-hover active:bg-btn-primary-tapped w-[130px] h-10 rounded-[55px] text-[32px]/8 btn-shadow '>بعدی</button>
+      
+   
+        {step === 1 && <Step1 message={message} onMessageChange={setMessage} checkedVariables={checkedVariables} onChangeCheckedVariables={setCheckedVaribale} />}
+        {step === 2 && <Step2 />}
+        {step === 3 && <Step3 />}
      </div>
+
+    <StepButtons isFirstStep={isFirstStep} isLastStep={isLastStep} onNextClick={handleNextClick} onSubmitClick={handleSubmitClick} setStep={setStep}/>
 
 
       
@@ -87,7 +73,6 @@ function NewCampain() {
 
       
     </div>
-   
   )
 }
 
