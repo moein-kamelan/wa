@@ -6,11 +6,19 @@ type MobileSidebarPropse = {
   onOpenSidebar: () => void;
 };
 
-function MobileSidebar({ isOpenSidebar, onOpenSidebar } : MobileSidebarPropse) {
+function MobileSidebar({ isOpenSidebar, onOpenSidebar }: MobileSidebarPropse) {
   return (
-    <div className={`lg:hidden flex-col w-[77px] tablet::w-[177px] min-w-[110px] max-w-[177px] grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${isOpenSidebar ? "fixed bottom-0 top-0 w-[300px]  sm:w-[361px] lg:hidden max-w-none" : ""}`}>
+    <div
+      className={`lg:hidden overflow-y-auto flex-col w-[77px] tablet:w-[177px] min-w-[110px] max-w-[177px] grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${
+        isOpenSidebar
+          ? "fixed bottom-0 top-0 w-[300px]  sm:w-[361px] lg:hidden max-w-none"
+          : ""
+      }`}
+    >
       <button
-        className={`py-[52px] w-full flex items-center justify-center ${isOpenSidebar && "hidden"}`}
+        className={`py-[52px] w-full flex items-center justify-center ${
+          isOpenSidebar && "hidden"
+        }`}
         onClick={onOpenSidebar}
       >
         <svg
@@ -39,18 +47,21 @@ function MobileSidebar({ isOpenSidebar, onOpenSidebar } : MobileSidebarPropse) {
         </svg>
       </button>
 
-
-        <div className={`flex  flex-col  lg:max-w-[386px] grow max-h-screen overflow-y-auto ${!isOpenSidebar && "hidden"}`}>
-      <div className="h-[38.8%]   w-full lg:max-w-[384px] relative">
-        <img
-          src="/public/images/sidebar-shape.png"
-          alt="sidebar-shape"
-          className="h-full w-full"
-        />
-        <div className="absolute  top-[5.27vh] right-0 left-0 mx-auto text-center">
-          <div className="rounded-full bg-[#F3F3F340]/75 size-38  flex items-center justify-center mx-auto relative">
-            <div className="bg-white rounded-full size-12 relative  -translate-y-2"></div>
-            <svg
+      <div
+        className={`flex  flex-col  lg:max-w-[386px] grow max-h-screen  ${
+          !isOpenSidebar && "hidden"
+        }`}
+      >
+        <div className="h-[38.8%]   w-full lg:max-w-[384px] relative">
+          <img
+            src="/public/images/dashboard/sidebar-shape.png"
+            alt="sidebar-shape"
+            className="h-full w-full"
+          />
+          <div className="absolute  top-[5.27vh] right-0 left-0 mx-auto text-center">
+            <div className="rounded-full bg-[#F3F3F340]/75 size-38  flex items-center justify-center mx-auto relative">
+              <div className="bg-white rounded-full size-12 relative  -translate-y-2"></div>
+              <svg
                 className="absolute bottom-0 right-0 left-0 mx-auto"
                 width="122"
                 height="50"
@@ -63,51 +74,68 @@ function MobileSidebar({ isOpenSidebar, onOpenSidebar } : MobileSidebarPropse) {
                   fill="#F3F3F3"
                 />
               </svg>
+            </div>
+
+            <span className="mt-px mb-[10px] text-[24px] text-white block">
+              User name
+            </span>
+            <span className="text-neutral-tertiary text-[22px]">
+              واتساپ : منقضی شده
+            </span>
           </div>
-
-          <span className="mt-px mb-[10px] text-[24px] text-white block">User name</span>
-          <span className="text-neutral-tertiary text-[22px]">واتساپ : منقضی شده</span>
         </div>
-      </div>
 
-      <div className="mt-4 lg:mt-[23px] mx-auto w-full px-7 lg:px-8 **:max-sm:text-2xl **:max-lg:text-3xl **:lg:text-[26px] xl:**:text-3xl">
-        <ul className=" overflow-y-auto   lg:max-h-[497px] [direction:ltr]  *:flex-row-reverse pr-2  [&::-webkit-scrollbar]:w-3
+        <div className="mt-4 lg:mt-[23px] mx-auto w-full px-7 lg:px-8 **:max-sm:text-2xl **:max-lg:text-3xl **:lg:text-[26px] xl:**:text-3xl">
+          <ul
+            className=" overflow-y-auto   max-h-[463px] [direction:ltr]  *:flex-row-reverse pr-2  [&::-webkit-scrollbar]:w-3
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:w-9/12
   [&::-webkit-scrollbar-track]:bg-neutral-tertiary
   [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]">
-          <li className="flex  items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
-            <Link to={""} className="text-primary">ایجاد کمپین جدید</Link>
-          </li>
-          <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>کمپین ها</span>
-            <img src="/public/images/sidebar-arrow.png" alt="sidebar-arrow" />
-          </li>
-          <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>گزارش ها</span>
-            <img src="/public/images/sidebar-arrow.png" alt="sidebar-arrow" />
-          </li>
-          <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>قالب های پیام</span>
-            <img src="/public/images/sidebar-arrow.png" alt="sidebar-arrow" />
-          </li>
-          <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>خرید و پرداخت</span>
-            <img src="/public/images/sidebar-arrow.png" alt="sidebar-arrow" />
-          </li>
-             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <Link to={""}>راهنما</Link>
-          </li>
-             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <Link to={""}>خروج از حساب کاربری</Link>
-          </li>
-    
-        </ul>
-
+  [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]"
+          >
+            <li className="flex  items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
+              <Link to={""} className="text-primary">
+                ایجاد کمپین جدید
+              </Link>
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <span>کمپین ها</span>
+              <img
+                src="/public/images/dashboard/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <span>گزارش ها</span>
+              <img
+                src="/public/images/dashboard/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <span>قالب های پیام</span>
+              <img
+                src="/public/images/dashboard/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <span>خرید و پرداخت</span>
+              <img
+                src="/public/images/dashboard/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <Link to={""}>راهنما</Link>
+            </li>
+            <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+              <Link to={""}>خروج از حساب کاربری</Link>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-      
     </div>
   );
 }

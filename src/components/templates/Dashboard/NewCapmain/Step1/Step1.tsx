@@ -1,74 +1,53 @@
 import React, { useMemo } from "react";
-import StepMessage from "../../../../modules/Dashboard/StepMessage/StepMessage";
+import { VariableRandomValueType } from "../../../../../types/dashboard/types";
 
 type Step1Props = {
   message: string;
   onMessageChange: (value: string) => void;
-  checkedVariables : {
-        firstName : boolean,
-    lastName : boolean ,
-    link : boolean , 
-    date : boolean , 
-    number : boolean , 
-    company : boolean , 
-    discount : boolean , 
-    trackingCode : boolean ,
-  }
-  onChangeCheckedVariables : any
+  checkedVariables: {
+    firstName: boolean;
+    lastName: boolean;
+    link: boolean;
+    date: boolean;
+    number: boolean;
+    company: boolean;
+    discount: boolean;
+    trackingCode: boolean;
+  };
+  onChangeCheckedVariables: any;
+  variableRandomValue: VariableRandomValueType;
 };
 
-const variableRandomValue = {
-  firstName : ["علی" , "{{نام}}"] ,
-lastName : ["رحمانی" , "{{نام خانوادگی}}"] ,
-link : ["www.shop.com/ali" , "{{لینک}}"] ,
-date : ["۱۴۰۴/۳/۸" , "{{تاریخ}}"] ,
-number : ["۲۰" , "{{عدد}}"] ,
-company : ["اسنوا" , "{{شرکت}}"] ,
-discount : ["۸۰٪" , "{{تخفیف}}"] ,
-trackingCode : ["dfsf2" , "{{کد رهگیری}}"],
-}
-
-function Step1({ message, onMessageChange , onChangeCheckedVariables , checkedVariables }: Step1Props) {
-
+function Step1({
+  message,
+  onMessageChange,
+  onChangeCheckedVariables,
+  checkedVariables,
+  variableRandomValue,
+}: Step1Props) {
   const previewMessage = useMemo(() => {
+    let previewMessage = message;
 
+    const selectedVariables: Partial<typeof variableRandomValue> = {};
+    for (const feild in checkedVariables) {
+      const key = feild as keyof typeof checkedVariables;
 
-     let previewMessage = message
-  
-    
-  const selectedVariables: Partial<typeof variableRandomValue > = {}
-    for(const feild in checkedVariables) {
-        const key = feild as keyof typeof checkedVariables; 
-
-      if(checkedVariables[key]) {
-        selectedVariables[key] = variableRandomValue[key]
-        
-        
+      if (checkedVariables[key]) {
+        selectedVariables[key] = variableRandomValue[key];
       }
     }
-    
-    
-    
+
     for (const feild in selectedVariables) {
-
-        const key = feild as keyof typeof selectedVariables; 
-       const variable = selectedVariables[key];
-  if (variable && message.includes(variable[1])) {
-    console.log(variable[0]);
-    previewMessage = previewMessage.replace(variable[1] , variable[0])
-    console.log('previewMessage:', previewMessage)
-    
-  }
-      
+      const key = feild as keyof typeof selectedVariables;
+      const variable = selectedVariables[key];
+      if (variable && message.includes(variable[1])) {
+        previewMessage = previewMessage.replace(variable[1], variable[0]);
+        console.log("previewMessage:", previewMessage);
+      }
     }
-    return previewMessage
-    
-  } , [message , checkedVariables])
+    return previewMessage;
+  }, [message, checkedVariables, variableRandomValue]);
 
-  console.log(previewMessage);
-  
-  
- 
   return (
     <div className="mx-auto w-[88%]">
       <div>
@@ -82,7 +61,8 @@ function Step1({ message, onMessageChange , onChangeCheckedVariables , checkedVa
               className="w-full h-[160px] lg:h-[180px] text-[22px] bg-white rounded-[22px] outline-0 pr-[21px] pt-[21px] resize-none"
               placeholder="ایجاد پیام متنی کمپین..."
             ></textarea>
-            <span className="text-semantic-accent text-[lg:] my-3 lg:mt-6 lg:mb-3 mr-4 block">
+
+            <span className="text-semantic-accent text-lg lg:text-2xl  my-3 lg:mt-6 lg:mb-3 mr-4 block">
               پیش نمایش پیام
             </span>
             <textarea
@@ -97,105 +77,240 @@ function Step1({ message, onMessageChange , onChangeCheckedVariables , checkedVa
         </div>
       </div>
 
-       <div className="max-md:grid max-md:items-end grid-cols-2 md:flex items-center gap-4 lg:justify-end justify-between xl:gap-15  mt-2 lg:mt-4 **:text-nowrap **:max-md:text-sm flex-wrap  gap-y-2 ">
+      <div className="max-md:grid max-md:items-end grid-cols-1 mobile:grid-cols-2 md:flex items-center gap-4 lg:justify-end justify-between lg:gap-x-15  mt-2 lg:mt-4 **:text-nowrap **:max-md:text-sm flex-wrap  gap-y-2 justify-items-center">
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>لینک</span>
-          {checkedVariables.link ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , link:e.target.checked}))} />
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{لینک}}"}
+          </span>
+          {checkedVariables.link ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                link: e.target.checked,
+              }))
+            }
+          />
         </label>
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>تاریخ</span>
-          {checkedVariables.date ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , date:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{تاریخ}}"}
+          </span>
+          {checkedVariables.date ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                date: e.target.checked,
+              }))
+            }
+          />
         </label>
 
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>نام خانوادگی</span>
-          {checkedVariables.lastName ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , lastName:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{نام خانوادگی}}"}
+          </span>
+          {checkedVariables.lastName ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                lastName: e.target.checked,
+              }))
+            }
+          />
         </label>
 
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>نام</span>
-          {checkedVariables.firstName ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"   onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , firstName:e.target.checked}))} />
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{نام}}"}
+          </span>
+          {checkedVariables.firstName ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                firstName: e.target.checked,
+              }))
+            }
+          />
         </label>
       </div>
-      
-      <div className="max-md:grid max-md:items-end grid-cols-2 md:flex items-center gap-4 lg:justify-end justify-between xl:gap-15 mt-4 **:text-nowrap **:max-md:text-sm flex-wrap  gap-y-2 ">
+
+      <div className="max-md:grid max-md:items-end grid-cols-1 mobile:grid-cols-2 md:flex items-center gap-4 lg:justify-end justify-between lg:gap-x-15 mt-4 **:text-nowrap **:max-md:text-sm flex-wrap  gap-y-2 justify-items-center">
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>کد پیگیری</span>
-          {checkedVariables.trackingCode ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , trackingCode:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{کد پیگیری}}"}
+          </span>
+          {checkedVariables.trackingCode ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                trackingCode: e.target.checked,
+              }))
+            }
+          />
         </label>
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>تخفیف</span>
-         {checkedVariables.discount ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , discount:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{تخفیف}}"}
+          </span>
+          {checkedVariables.discount ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                discount: e.target.checked,
+              }))
+            }
+          />
         </label>
 
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>شرکت</span>
-           {checkedVariables.company ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , company:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{شرکت}}"}
+          </span>
+          {checkedVariables.company ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                company: e.target.checked,
+              }))
+            }
+          />
         </label>
 
         <label className="flex items-center gap-1 w-[106px] justify-end ">
-          <span>شماره</span>
-          {checkedVariables.number ?  <img
-            src="/public/images/checkbox-checked.png"
-            alt="checkbox"
-            className="size-8 max-lg:size-6"
-           
-          /> : <img src="/public/images/checkbox-not-checked.png" alt="checkbox"
-            className="size-8 max-lg:size-6"/>}
-          <input type="checkbox" className="hidden"  onChange={e => onChangeCheckedVariables( (prevState : any) => ({...prevState , number:e.target.checked}))}/>
+          <span className="[text-shadow:0_4px_4px_rgba(7,94,84,0.55)]">
+            {"{{شماره}}"}
+          </span>
+          {checkedVariables.number ? (
+            <img
+              src="/public/images/dashboard/checkbox-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          ) : (
+            <img
+              src="/public/images/dashboard/checkbox-not-checked.png"
+              alt="checkbox"
+              className="size-8 max-lg:size-6"
+            />
+          )}
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={(e) =>
+              onChangeCheckedVariables((prevState: any) => ({
+                ...prevState,
+                number: e.target.checked,
+              }))
+            }
+          />
         </label>
       </div>
-     
     </div>
   );
 }

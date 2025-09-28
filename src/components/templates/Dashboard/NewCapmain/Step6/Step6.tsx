@@ -1,0 +1,42 @@
+import React, { useState } from "react";
+
+function Step6() {
+  const [isShowQrCode, setIsShowQrCode] = useState(false);
+  const handleClickConnect = () => {
+    setIsShowQrCode(true);
+  };
+  return (
+    <>
+      {!isShowQrCode ? (
+        <div className=" w-full flex flex-col items-center text-center justify-center h-9/10 px-50 ">
+          <span className="text-[40px] font-B-Nazanin text-[#A3A3A3]">
+            شما هنوز اکانت واتساپ خود را متصل نکرده اید از طریق دکمه زیر اقدام
+            کنید
+          </span>
+          <button
+            className="bg-primary text-white text-5xl rounded-[55px] px-7 pt-2 pb-3 active:bg-btn-primary-tapped hover:bg-btn-primary-hover mt-31"
+            onClick={handleClickConnect}
+          >
+            اتصال واتساپ
+          </button>
+        </div>
+      ) : (
+        <div className=" w-full flex flex-col items-center text-center justify-center h-9/10 px-50 ">
+          <span className="text-[40px]  text-gray-black">
+            کیو آر کد زیر را اسکن کنید.
+          </span>
+          <img
+            src="../../../../../../public/images/dashboard/qr-code.jpg"
+            alt="QR Code"
+            className="mt-10 mb-7.5"
+          />
+          <span className=" text-semantic-success text-5xl rounded-[55px] px-7 pt-2 pb-3  ">
+            متصل شد
+          </span>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default Step6;

@@ -6,7 +6,7 @@ type StepperProps = {
 
 function Stepper({step} : StepperProps) {
   return (
- <div className="relative bg-secondary rounded-xl w-[70%] h-3 xl:h-3.5 mx-auto mt-7.5 mb-10 lg:mt-11 lg:mb-[51px]">
+ <div className="hidden lg:block relative bg-secondary rounded-xl w-[70%] h-3 xl:h-3.5 mx-auto mt-7.5 mb-10 lg:mt-11 lg:mb-[51px]">
 
 
      <div className="flex items-center  justify-between w-full bottom-0 top-0 my-auto  absolute">
