@@ -42,7 +42,6 @@ function Step1({
       const variable = selectedVariables[key];
       if (variable && message.includes(variable[1])) {
         previewMessage = previewMessage.replace(variable[1], variable[0]);
-        console.log("previewMessage:", previewMessage);
       }
     }
     return previewMessage;

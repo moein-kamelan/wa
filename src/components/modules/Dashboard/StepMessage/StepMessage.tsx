@@ -8,9 +8,9 @@ type StepMessageProps = {
 function StepMessage({ children, status }: StepMessageProps) {
   return (
     <div
-      className={`sticky right-0 left-0 top-0 w-full flex gap-[6px] items-center pr-4 py-4 lg:text-3xl text-lg ${
+      className={`absolute right-0 left-0 top-0 w-full flex gap-[6px] items-center pr-4 py-4 lg:text-3xl text-lg ${
         status === "error" && "bg-semantic-error/30 text-semantic-error"
-      }`}
+      } ${status === "uploading" && "bg-semantic-accent/30 text-semantic-accent"} ${status === "success" && "bg-semantic-success/30 text-semantic-success"}`}
     >
       {status === "error" && (
         <img
@@ -21,6 +21,12 @@ function StepMessage({ children, status }: StepMessageProps) {
       {status === "success" && (
         <img
           src="/public/images/dashboard/tick-square.png"
+          alt="close-circle"
+        />
+      )}
+      {status === "uploading" && (
+        <img
+          src="/public/images/dashboard/uploading.png"
           alt="close-circle"
         />
       )}

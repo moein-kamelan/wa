@@ -31,16 +31,16 @@ export const isValideMessageVariable  = (
   return true;
 };
 
-export const step1Validation = (
+export const validateStep1 = (
   message : string,
-  setStep1Error : any,
+  setErrorMessage : any,
   variableRandomValue : any,
   checkedVariables : any,
 ) => {
   if (message.trim() === "") {
-    setStep1Error("ابتدا پیام متنی کمپین خود را ایجاد کنید.");
+    setErrorMessage("ابتدا پیام متنی کمپین خود را ایجاد کنید.");
     setTimeout(() => {
-      setStep1Error(null);
+      setErrorMessage(null);
     }, 3000);
     return;
   }
@@ -49,12 +49,47 @@ export const step1Validation = (
     !isValideMessageVariable(variableRandomValue, message, checkedVariables)
   ) {
 
-    setStep1Error("متغیر نوشته شده در متن انتخاب نشده");
+    setErrorMessage("متغیر نوشته شده در متن انتخاب نشده");
     setTimeout(() => {
-      setStep1Error(null);
+      setErrorMessage(null);
     }, 3000);
 
     return;
   }
   return true
 };
+
+export const validateStep2 = (file : File , setErrorMessage : (value : string | null) => any ) => {
+
+      const validTypes = [
+      "application/vnd.ms-excel", 
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+    ];
+    const fileExtension = file.name.split(".").pop()?.toLowerCase();
+
+    if (
+      !validTypes.includes(file.type) &&
+      !["xls", "xlsx"].includes(fileExtension || "")
+    ) {
+      setErrorMessage("فقط فایل اکسل مجاز است (.xls یا .xlsx)");
+
+      setTimeout(() => {
+      setErrorMessage(null);
+    }, 3000);
+      return;
+    }
+
+    const maxSize = 2 * 1024 * 1024
+
+    if(file.size > maxSize) {
+      setErrorMessage("حجم فایل بزرگتر از حد مجاز می باشد. (حداکثر حجم مجاز 20 مگابایت)")
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 3000);
+      return 
+    }
+
+
+    return true
+
+}

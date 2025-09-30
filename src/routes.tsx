@@ -6,14 +6,16 @@ import { Navigate } from "react-router"
  const routes = [
     // {path : "/" , element : <Home/>} , 
     {path : "/dashboard/*"  , element : <Dashboard/> , children : [
-        {path : "" , element : <NewCampaign/>} , 
+        {path : "" ,element : <Navigate to={"new-campaign"} replace/>} , 
+        {path : "new-campaign" , element : <NewCampaign/>} , 
+        {path : "new-campaign" , element : <NewCampaign/>} , 
         
     ]
 },
 
         {path : "/admin-dashboard/*" , element : <AdminDashboard/> ,   children : [
             {path : "" , element : <Navigate to={"user-managment"} replace /> } ,
-            {path : "user-managment" , element : <UsersManagment/>  }
+            {path : "user-managment" , element : <UsersManagment/> }
         ]}
 
 ]

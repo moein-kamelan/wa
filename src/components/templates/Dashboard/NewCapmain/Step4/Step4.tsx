@@ -1,11 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import { axiosInstance } from "../../../../../utils/axios";
 
-function Step4() {
+type Step4Props = {
+  setErrorMessage : (value: string) => void
+}
+
+
+function Step4({setErrorMessage} : Step4Props) {
+  const [uploadedFileCount , setUploadedFileCount] = useState<number>(0)
+  const [totlaFile , setTotlaFile] = useState<number>(0)
+  const handeFileChange = async(e : React.ChangeEvent<HTMLInputElement>) => {
+    if(!e.target.files) return
+    const files = Array.from(e.target.files)
+    setTotlaFile(files.length)
+    console.log('files:', files)
+
+
+    if(files.length > 15) {
+      console.log("its not valid");
+      return
+      
+    }
+
+    try {
+      for (let i = 0 ; i < files.length ; i++) {
+
+            const formData = new FormData()
+    formData.append("attachment" , e.target.files[i])
+      
+     const response = await axiosInstance.post("/api/campaigns/68da78982bacae83154b71f2/attachment" , formData , {
+        headers : {
+          Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTIxMTAyNCwiZXhwIjoxNzYxODAzMDI0fQ.vaR2NHlnVv9Q3d-sSfh5dF_VKncFFZjxE3QROGpKoXk`,
+          "Content-Type" : "multipart/form-data"
+        }
+        
+      })
+console.log("response => " , response);
+
+      setUploadedFileCount(u => u + 1)
+        
+        
+        
+      }
+
+
+      
+      
+    } catch (error ) {
+      console.log('error:', error)
+      setErrorMessage("اپلود فایل با مشکل مواجه شده")
+      
+    }
+
+
+    
+    
+  }
   return (
     <div className="mx-auto w-[88%] ">
       <div className="  flex flex-col px-10 md:px-20 lg:px-30 xl:px-35 rounded-[20px] bg-[#EEEEEE] mt-6.5 lg:mt-8   overflow-y-auto pt-4 md:pt-12  min-h-[520px]  ">
         <label className="shrink-0 bg-[#f8f7f7] border border-[#CFCFCF] border-dashed rounded-2xl   flex flex-col items-center justify-center  cursor-pointer mb-1 md:mb-5 px-6 md:px-12 py-4">
-          <input type="file" className="hidden" />
+          <input type="file" className="hidden"  multiple  onChange={handeFileChange}/>
 
           <svg
             className=" size-28 md:size-34 shrink-0"
@@ -57,7 +112,7 @@ function Step4() {
             آپلود شده :{" "}
           </span>
           <span className="mt-5 font-B-Nazanin text-accent text-xl md:text-2xl">
-            15/0
+            {totlaFile} / {uploadedFileCount}
           </span>
         </div>
       </div>

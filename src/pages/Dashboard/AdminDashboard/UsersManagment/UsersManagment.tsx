@@ -11,7 +11,10 @@ const options = [
 
 function UsersManagment() {
   return (
-    <div className="flex flex-col h-screen overflow-y-auto">
+    <div className="flex flex-col h-screen overflow-y-auto relative">
+      <div className="bg-secondary/35 inset-0 w-full h-full absolute z-20">
+
+      </div>
       <AdminDashboardHeader>
         <span className="text-secondary text-[56px] text-shadow-[2px_4px_4px_rgb(255,255,255,0.75)]">
           مدیریت کاربران
@@ -78,7 +81,12 @@ function UsersManagment() {
           </div>
         </div>
 
-        <div className="bg-white/55  rounded-2xl grow pt-8   w-98/100 mx-auto">
+        <div className="bg-white/55  rounded-2xl grow  w-98/100 mx-auto">
+   <div className=" pt-8  ">
+
+        
+        
+        
           <div className="relative   rounded-2xl border-[3px] border-secondary overflow-x-auto max-w-9/10 max-h-[523px]   overflow-y-auto mx-auto">
             <table className="w-full  border-collapse text-center table-auto ">
               <thead className="bg-neutral-primary/80 text-gray-black *:font-B-Nazanin xl:text-2xl 2xl:text-[32px] text-nowrap border-b-[3px] border-secondary">
@@ -297,7 +305,11 @@ function UsersManagment() {
             </table>
           </div>
         </div>
+        </div>
+
+     
       </AdminDashboardMain>
+
     </div>
   );
 }
