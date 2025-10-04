@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="lg:flex hidden flex-col shrink-0 lg:max-w-[386px] grow max-h-screen overflow-y-auto">
-      <div className="h-[38.8%] max-h-[440px]  lg:min-w-full- relative">
+    <div className="lg:flex hidden flex-col shrink-0 xl:max-w-[344px] 2xl:max-w-[386px] grow max-h-screen overflow-y-auto">
+      <div className="h-[38.8%] max-h-[440px]  lg:min-w-full- relative min-h-[300px]">
         <img
           src="/public/images/dashboard/sidebar-shape.png"
           alt="sidebar-shape"
@@ -47,23 +47,32 @@ function Sidebar() {
   [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]"
         >
           <li className="flex  items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
-            <Link to={""} className="text-primary">
+            <NavLink to={"/dashboard/new-campaign"} className={({isActive}) => isActive ? "text-primary" : ""}>
               ایجاد کمپین جدید
-            </Link>
+            </NavLink>
           </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>کمپین ها</span>
+          <li className=" flex  items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
+            <NavLink to={"/dashboard/campagins"}  className={({isActive}) => isActive ? "text-primary" : ""}>
+              کمپین ها
+            </NavLink>
+          
+          </li>
+              <li className="  lg:h-[71px] border-[1.5px] border-neutral-tertiary  rounded-[5px] ">
+            <button className="flex items-center justify-between w-full h-full px-4">
             <img
               src="/public/images/dashboard/sidebar-arrow.png"
               alt="sidebar-arrow"
-            />
-          </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>گزارش ها</span>
-            <img
-              src="/public/images/dashboard/sidebar-arrow.png"
-              alt="sidebar-arrow"
-            />
+              />
+              <span>گزارش ها</span>
+            </button>
+            <ul className="">
+              <li><NavLink to={""}></NavLink> </li>
+              <li><NavLink to={""}></NavLink> </li>
+              <li><NavLink to={""}></NavLink> </li>
+              <li><NavLink to={""}></NavLink> </li>
+
+            </ul>
+          
           </li>
           <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
             <span>قالب های پیام</span>
@@ -80,10 +89,10 @@ function Sidebar() {
             />
           </li>
           <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <Link to={""}>راهنما</Link>
+            <NavLink to={""}>راهنما</NavLink>
           </li>
           <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <Link to={""}>خروج از حساب کاربری</Link>
+            <NavLink to={""}>خروج از حساب کاربری</NavLink>
           </li>
         </ul>
       </div>

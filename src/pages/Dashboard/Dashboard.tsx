@@ -34,7 +34,7 @@ function Dashboard() {
         <Outlet />
         <div
           className={`hidden fixed inset-0 w-full h-full bg-[#075E54]/36 border border-neutral-tertiary z-10 ${
-            isOpenSidebar && "!block lg:!hidden"
+            isOpenSidebar ? "!block lg:!hidden" : ""
           }`}
           onClick={handleCloseSidebar}
         ></div>

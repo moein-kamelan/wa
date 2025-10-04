@@ -9,7 +9,7 @@ type MobileSidebarPropse = {
 function MobileSidebar({ isOpenSidebar, onOpenSidebar }: MobileSidebarPropse) {
   return (
     <div
-      className={`lg:hidden overflow-y-auto flex-col w-[77px] tablet:w-[177px] min-w-[110px] max-w-[177px] grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${
+      className={`lg:hidden overflow-y-auto flex-col w-[77px]  tablet:w-[177px] min-w-[110px] max-w-[177px] grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${
         isOpenSidebar
           ? "fixed bottom-0 top-0 w-[300px]  sm:w-[361px] lg:hidden max-w-none"
           : ""

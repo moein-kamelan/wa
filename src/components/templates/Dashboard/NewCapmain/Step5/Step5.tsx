@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputContainer from "../../../../modules/InputContainer/InputContainer";
 import Select, { components } from "react-select";
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 const options = [
@@ -10,33 +10,42 @@ const options = [
   { value: "vanilla", label: "سریع: 5 ثانیه" },
 ];
 
+const today = new DateObject({ calendar: persian, locale: persian_fa });
+
 function Step5() {
-  const current = new Date();
-  const [date, setDate] = useState(current);
+  const [date, setDate] = useState();
 
   return (
     <div className="mx-auto w-[88%] space-y-8">
-      <InputContainer
+   <div className="flex flex-col gap-y-8 mt-[58px]">
+
+
+       <InputContainer
         text="زمان ارسال"
         textSize="text-xl sm:text-3xl md:text-[40px]"
       >
+
+        
+        
+        
         <div className="flex items-center gap-1">
+          
           <input
-            className="bg-neutral-primary/30 border-2 border-secondary text-secondary rounded-2xl px-5 py-2 text-center  placeholder:text-lg  text-lg sm:text-xl md:text-3xl"
+            className="bg-neutral-primary/30 border-2 border-secondary text-secondary rounded-2xl px-5 py-2 text-center    text-lg sm:text-xl md:text-3xl placeholder:text-4xl"
             type="number"
             max={59}
             min={1}
-            defaultValue={10}
-            placeholder="دقیقه"
+            
+            placeholder="30"
           />
           <span className="text-[32px] "> : </span>
           <input
-            className=" bg-neutral-primary/30 border-2 border-secondary  text-secondary  rounded-2xl px-5 py-2 text-center  placeholder:text-lg text-lg sm:text-xl md:text-3xl"
+            className=" bg-neutral-primary/30 border-2 border-secondary  text-secondary  rounded-2xl px-5 py-2 text-center  placeholder:text-4xl text-lg sm:text-xl md:text-3xl"
             type="number"
             max={24}
             min={1}
-            defaultValue={10}
-            placeholder="ساعت"
+            
+            placeholder="16"
           />
         </div>
       </InputContainer>
@@ -146,8 +155,9 @@ function Step5() {
                 />
               </svg>
 
-              <div className="text-center  text-secondary text-lg sm:text-xl md:text-3xl">
-                {valueString || "انتخاب تاریخ"}
+              <div className={`text-center  text- text-lg sm:text-xl md:text-3xl ${valueString ? "text-secondary" : "text-neutral-tertiary"} `}>
+                { valueString || today.format("YYYY/MM/DD")}
+
               </div>
             </div>
           )}
@@ -179,6 +189,10 @@ function Step5() {
           }}
         />
       </InputContainer>
+    
+    
+    
+   </div>
     </div>
   );
 }

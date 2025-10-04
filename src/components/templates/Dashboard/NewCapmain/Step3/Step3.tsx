@@ -21,8 +21,8 @@ function Step3({
 }: Step3Props) {
   return (
     <div className="mx-auto w-[88%] ">
-      <div className="   rounded-[20px] bg-[#EEEEEE] mt-6.5 lg:mt-8   overflow-y-auto pt-12  h-[560px] lg:h-[600px] ">
-        <div className="w-[67.4%] h-[484px] rounded-2xl mx-auto shadow-[1px_2px_15px_0_rgba(0,0,0,0.25)] flex flex-col pt-6 px-4.5 bg-[##FFFEFE2B]/17 pb-9 max-sm:overflow-y-auto">
+      <div className="   rounded-[20px] bg-neutral-tertiary mt-6.5 lg:mt-8   overflow-y-auto pt-12  h-[560px] lg:h-[600px] ">
+        <div className="w-[67.4%] h-[484px] rounded-2xl mx-auto shadow-[1px_2px_15px_0_rgba(0,0,0,0.25)] flex flex-col pt-6 px-4.5 bg-[#FFFEFE]/17 pb-9 max-sm:overflow-y-auto">
           <label className="shrink-0 bg-[#f8f7f7] border border-[#CFCFCF] border-dashed rounded-2xl min-h-[339px] flex flex-col items-center justify-center gap-2 md:gap-8 cursor-pointer mb-8 px-12 py-4">
             <input
               type="file"
@@ -204,7 +204,7 @@ function Step3({
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between font-inter flex-wrap-reverse gap-2">
                     <span className="text-xs 2xl:text-base">{`${
-                      loadedData / 1000
+                      (loadedData || 0) / 1000
                     }/${totalData / 1000}Mb`}</span>
                     <span className="text-semantic-success text-xs 2xl:text-base">
                       {fileName}
