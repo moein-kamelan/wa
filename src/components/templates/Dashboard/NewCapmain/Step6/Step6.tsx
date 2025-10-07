@@ -1,9 +1,27 @@
 import React, { useState } from "react";
+import { axiosInstance } from "../../../../../utils/axios";
 
 function Step6() {
   const [isShowQrCode, setIsShowQrCode] = useState(false);
-  const handleClickConnect = () => {
+  const handleClickConnect = async() => {
+try {
+      const response = await axiosInstance.post("/api/campaigns/68da78cf2bacae83154b71f7/qr-code" , undefined ,{
+      headers : {
+        Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+      }
+    })
+
+
+      console.log('response:', response)
+
     setIsShowQrCode(true);
+} catch (error) {
+  console.log("error in connect to whatsup" , error);
+  
+}
+
+    
+    
   };
   return (
     <>

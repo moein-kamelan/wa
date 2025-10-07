@@ -19,7 +19,6 @@ import JSZip from "jszip";
 
 function NewCampaign() {
   const [direction, setDirection] = useState<"next" | "back">("next");
-  console.log(direction);
   
   const [message, setMessage] = useState(
     getSessionStorage("campaignMessageText") || ""

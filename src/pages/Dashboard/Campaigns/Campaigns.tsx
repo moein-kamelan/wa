@@ -56,8 +56,8 @@ function Campaigns() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M22 0C34.1503 0 44 9.84974 44 22C44 34.1503 34.1503 44 22 44C9.84974 44 0 34.1503 0 22C0 9.84974 9.84974 0 22 0ZM16.3838 12.54C16.0612 12.5401 15.7532 12.5985 15.46 12.7158C15.1666 12.8038 14.9172 12.9509 14.7119 13.1562C14.3013 13.5962 14.008 14.0805 13.832 14.6084C13.6562 15.1068 13.627 15.6051 13.7441 16.1035V25.5195C13.7735 26.1942 13.7881 26.8693 13.7881 27.5439C13.7588 28.1891 13.8758 28.8197 14.1396 29.4355C14.3156 29.9342 14.6537 30.3307 15.1523 30.624C15.6214 30.8878 16.1051 31.0194 16.6035 31.0195C17.0142 31.0195 17.3814 30.9319 17.7041 30.7559C17.9974 30.5799 18.3053 30.3304 18.6279 30.0078C18.8626 29.7438 19.0535 29.4652 19.2002 29.1719C19.3175 28.8493 19.4052 28.512 19.4639 28.1602C19.4932 27.8082 19.5078 27.4555 19.5078 27.1035C19.4785 26.7224 19.4492 26.3558 19.4199 26.0039L19.376 16.4561V16.0596C19.376 15.7957 19.3613 15.4876 19.332 15.1357C19.2734 14.7839 19.171 14.4173 19.0244 14.0361C18.8778 13.6549 18.6721 13.3469 18.4082 13.1123C18.2029 12.9363 17.9095 12.8038 17.5283 12.7158C17.1177 12.5985 16.7358 12.54 16.3838 12.54ZM27.8682 12.54C27.5456 12.54 27.2376 12.5986 26.9443 12.7158C26.651 12.8038 26.4016 12.9509 26.1963 13.1562C25.7856 13.5963 25.4924 14.0804 25.3164 14.6084C25.1405 15.1068 25.1104 15.6051 25.2275 16.1035V25.5195C25.2569 26.1942 25.2725 26.8693 25.2725 27.5439C25.2431 28.1891 25.3601 28.8197 25.624 29.4355C25.8 29.9342 26.1372 30.3307 26.6357 30.624C27.105 30.888 27.5893 31.0195 28.0879 31.0195C28.4986 31.0195 28.8658 30.9319 29.1885 30.7559C29.4817 30.5799 29.7898 30.3303 30.1123 30.0078C30.3469 29.7439 30.537 29.4651 30.6836 29.1719C30.8009 28.8492 30.8896 28.5121 30.9482 28.1602C30.9776 27.8082 30.9922 27.4555 30.9922 27.1035C30.9629 26.7223 30.9336 26.3558 30.9043 26.0039L30.8604 16.4561V16.0596C30.8603 15.7957 30.8457 15.4876 30.8164 15.1357C30.7577 14.7838 30.6544 14.4174 30.5078 14.0361C30.3611 13.6548 30.1556 13.347 29.8916 13.1123C29.6863 12.9363 29.393 12.8038 29.0117 12.7158C28.6012 12.5986 28.22 12.5401 27.8682 12.54Z"
               fill="#2196F3"
             />
@@ -102,7 +102,7 @@ function Campaigns() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-auto">
       <div className="flex items-center justify-between pr-3 pl-11.5 mb-[92px] shrink-0">
         <div className="relative">
           <svg
@@ -179,7 +179,10 @@ function Campaigns() {
   [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]"
         >
           {campaigns?.map((campaign: any) => (
-            <div className="bg-white px-10.5 py-[21px] grid grid-cols-[60px_1fr_1fr_1fr_24px] items-center justify-center rounded-tl-[6px] rounded-tr-[6px] text-2xl shadow-[2px_-4px_4px_0px_rgba(0,0,0,0.25)]">
+            <div
+              key={campaign._id}
+              className="bg-white px-10.5 py-[21px] grid grid-cols-[60px_1fr_1fr_1fr_24px] items-center justify-center rounded-tl-[6px] rounded-tr-[6px] text-2xl shadow-[2px_-4px_4px_0px_rgba(0,0,0,0.25)]"
+            >
               <span>تست</span>
               <div className="flex items-center justify-center gap-x-1.5">
                 <svg
@@ -192,42 +195,42 @@ function Campaigns() {
                   <path
                     d="M22 12.98V15.5C22 19 20 20.5 17 20.5H7"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M2 8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M2 16.5H8"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M2 12.5H5"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
@@ -247,79 +250,79 @@ function Campaigns() {
                   <path
                     d="M3 13.01V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5V16.36C20.27 15.53 19.2 15 18 15C15.79 15 14 16.79 14 19C14 19.75 14.21 20.46 14.58 21.06C14.79 21.42 15.06 21.74 15.37 22H8C4.5 22 3 20 3 17"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M8 2V5"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M16 2V5"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M3.5 9.08984H20.5"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M18 23C20.2091 23 22 21.2091 22 19C22 16.7909 20.2091 15 18 15C15.7909 15 14 16.7909 14 19C14 21.2091 15.7909 23 18 23Z"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M19.4898 19.0498H16.5098"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M18 17.5898V20.5798"
                     stroke="#25D366"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M11.9955 13.7002H12.0045"
                     stroke="#25D366"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M8.29431 13.7002H8.30329"
                     stroke="#25D366"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M8.29431 16.7002H8.30329"
                     stroke="#25D366"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
@@ -347,19 +350,19 @@ function Campaigns() {
                 <path
                   d="M10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17C10.9 17 10 17.9 10 19Z"
                   stroke="#25D366"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
                 <path
                   d="M10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3C10.9 3 10 3.9 10 5Z"
                   stroke="#25D366"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
                 <path
                   d="M12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12"
                   stroke="#25D366"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>

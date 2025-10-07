@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
@@ -8,6 +9,11 @@ function Sidebar() {
       messageTemplates : true ,
       buyAndPayment : true
     });
+
+    const location = useLocation()
+
+    const isActiveLink = (status : string) => location.pathname === "/dashboard/reports" && location.search === `?status=${status}`
+    
 
   return (
     <div className="lg:flex hidden flex-col shrink-0 xl:max-w-[344px] 2xl:max-w-[386px]  max-h-screen overflow-y-auto">
@@ -96,14 +102,9 @@ function Sidebar() {
             }
           >
             <NavLink
-              to={"/dashboard/reports"}
-              className={({ isActive }) =>
-                `${
-                  isActive
-                    ? "text-primary border-neutral-primary"
-                    : "border-neutral-tertiary"
-                } flex items-center justify-between  px-4 border-[1.5px]   rounded-[5px] py-4`
-              }
+              to={"/dashboard/reports?status=all"}
+
+              className={`flex items-center justify-between  px-4 border-[1.5px]   rounded-[5px] py-4 ${isActiveLink("all") ? "text-primary border-neutral-primary" : "border-neutral-tertiary"}`}
             >
               <img
                 className={`transition duration-500 ${
@@ -125,56 +126,35 @@ function Sidebar() {
           >
             <li className="w-full text-right">
               <NavLink
-                to={"/dashboard/reports/all-campaigns"}
-                className={({ isActive }) =>
-                  `${
-                    isActive
-                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
-                      : "border-r-neutral-tertiary text-gray-black"
-                  } block  p-3  !text-xl border-r-6 `
-                }
+                to={"/dashboard/reports?status=all"}
+
+                className={`block  p-3  !text-xl border-r-6 ${isActiveLink("all") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+                
+           
               >
                 همه ی کمپین ها
               </NavLink>
             </li>
             <li className="w-full text-right">
               <NavLink
-                to={"/dashboard/reports/active-campagins"}
-                className={({ isActive }) =>
-                  `${
-                    isActive
-                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
-                      : "border-r-neutral-tertiary text-gray-black"
-                  } block  p-3  !text-xl border-r-6 `
-                }
+                to={"/dashboard/reports?status=active"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("active") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
               >
                 فعال
               </NavLink>{" "}
             </li>
             <li className="w-full text-right">
               <NavLink
-                to={"/dashboard/reports/inactive-campagins"}
-                className={({ isActive }) =>
-                  `${
-                    isActive
-                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
-                      : "border-r-neutral-tertiary text-gray-black"
-                  } block  p-3  !text-xl border-r-6 `
-                }
+                to={"/dashboard/reports?status=inactive"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("inactive") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
               >
                 غیر فعال
               </NavLink>{" "}
             </li>
             <li className="w-full text-right">
               <NavLink
-                to={"/dashboard/reports/blocked-campagins"}
-                className={({ isActive }) =>
-                  `${
-                    isActive
-                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
-                      : "border-r-neutral-tertiary text-gray-black"
-                  } block  p-3  !text-xl border-r-6 `
-                }
+                to={"/dashboard/reports?status=blocked"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("blocked") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
               >
                 مسدود شده
               </NavLink>{" "}
