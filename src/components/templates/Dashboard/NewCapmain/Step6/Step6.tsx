@@ -8,7 +8,7 @@ function Step6() {
   return (
     <>
       {!isShowQrCode ? (
-        <div className=" w-full flex flex-col items-center text-center justify-center h-9/10 px-10 pt-4 sm:px-30 md:px-50 ">
+        <div className="grow w-full flex flex-col items-center text-center justify-center h-9/10 px-10 pt-4 sm:px-30 md:px-50 ">
           <span className="text-[40px] font-B-Nazanin text-[#A3A3A3]">
             شما هنوز اکانت واتساپ خود را متصل نکرده اید از طریق دکمه زیر اقدام
             کنید

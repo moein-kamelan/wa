@@ -4,7 +4,7 @@ import InputContainer from "../../../../modules/InputContainer/InputContainer";
 function Step7() {
   return (
     <div className="mx-auto w-[88%]  ">
-  <div className="flex flex-col gap-y-2 lg:gap-y-16 mt-5 h-full">
+  <div className="flex flex-col  lg:gap-y-10 mt-5 h-full">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <InputContainer

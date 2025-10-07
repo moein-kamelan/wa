@@ -125,7 +125,7 @@ const Step5 = forwardRef<Step5Ref, Step5Props>(({ onSubmit }, ref) => {
                 text="زمان ارسال"
                 textSize="text-xl sm:text-3xl md:text-[40px]"
                 customClasses={
-                  formik.touched.minute && formik.errors.minute
+                  formik.errors.hour || formik.errors.minute
                     ? "bg-semantic-error/44"
                     : ""
                 }

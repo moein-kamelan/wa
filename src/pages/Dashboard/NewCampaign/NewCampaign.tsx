@@ -24,7 +24,7 @@ function NewCampaign() {
   const [message, setMessage] = useState(
     getSessionStorage("campaignMessageText") || ""
   );
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(6);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [successMessage, setSuccessMessage] = useState<null | string>(null);
   const [uploadMessage, setUploadMessage] = useState<null | string>(null);
@@ -292,7 +292,7 @@ const step5Ref = useRef<Step5Ref | null>(null);
       <SmallStepper step={step} />
 
       <div className="pr-3 lg:pr-[22px]  w-full max-w-[93%]   ">
-        <div className="rounded-2xl bg-white md:h-[79.5vh] overflow-y-auto pb-9  md:pb-10  relative overflow-x-hidden">
+        <div className="flex flex-col rounded-2xl bg-white md:h-[79.5vh] overflow-y-auto pb-9  md:pb-10  relative overflow-x-hidden">
           {errorMessage && (
             <StepMessage status="error">{errorMessage}</StepMessage>
           )}
@@ -326,6 +326,7 @@ const step5Ref = useRef<Step5Ref | null>(null);
     duration: 0.15,
      ease: [0.25, 0.8, 0.25, 1],
   }}
+  className="flex flex-col grow"
 >
     {step === 1 && (
       <Step1
