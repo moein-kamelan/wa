@@ -26,7 +26,7 @@ function Step6() {
             کیو آر کد زیر را اسکن کنید.
           </span>
           <img
-            src="../../../../../../public/images/dashboard/qr-code.jpg"
+            src="../../../../../../public/images/dashboard/new-campaign/qr-code.jpg"
             alt="QR Code"
             className="mt-10 mb-7.5"
           />

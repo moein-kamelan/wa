@@ -83,13 +83,13 @@ function Step1({
           </span>
           {checkedVariables.link ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -112,13 +112,13 @@ function Step1({
           </span>
           {checkedVariables.date ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -141,13 +141,13 @@ function Step1({
           </span>
           {checkedVariables.lastName ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -170,13 +170,13 @@ function Step1({
           </span>
           {checkedVariables.firstName ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -201,13 +201,13 @@ function Step1({
           </span>
           {checkedVariables.trackingCode ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -229,13 +229,13 @@ function Step1({
           </span>
           {checkedVariables.discount ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -258,13 +258,13 @@ function Step1({
           </span>
           {checkedVariables.company ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
@@ -287,13 +287,13 @@ function Step1({
           </span>
           {checkedVariables.number ? (
             <img
-              src="/public/images/dashboard/checkbox-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />
           ) : (
             <img
-              src="/public/images/dashboard/checkbox-not-checked.png"
+              src="/public/images/dashboard/new-campaign/checkbox-not-checked.png"
               alt="checkbox"
               className="size-8 max-lg:size-6"
             />

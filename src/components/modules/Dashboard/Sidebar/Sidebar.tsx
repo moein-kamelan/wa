@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
+  const [isReportsOptionsCollapse, setIsReportsOptionsCollapse] =
+    useState({
+      reports : true ,
+      messageTemplates : true ,
+      buyAndPayment : true
+    });
+
   return (
-    <div className="lg:flex hidden flex-col shrink-0 xl:max-w-[344px] 2xl:max-w-[386px] grow max-h-screen overflow-y-auto">
+    <div className="lg:flex hidden flex-col shrink-0 xl:max-w-[344px] 2xl:max-w-[386px]  max-h-screen overflow-y-auto">
       <div className="h-[38.8%] max-h-[440px]  lg:min-w-full- relative min-h-[300px]">
         <img
-          src="/public/images/dashboard/sidebar-shape.png"
+          src="/public/images/dashboard/new-campaign/sidebar-shape.png"
           alt="sidebar-shape"
           className="h-full w-full"
         />
@@ -37,62 +44,179 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="mt-[23px] mx-auto w-full px-8 **:lg:text-[26px] xl:**:text-3xl">
+      <div className="transition-all duration-500 mt-[23px] mx-auto w-full px-8 **:lg:text-[26px] xl:**:text-3xl">
         <ul
-          className=" overflow-y-auto  lg:max-h-[497px] [direction:ltr]  *:flex-row-reverse pr-2  [&::-webkit-scrollbar]:w-3
+          className="   flex flex-col overflow-y-auto pr-2 lg:max-h-[497px]  [direction:ltr]  *:flex-row-reverse   [&::-webkit-scrollbar]:w-3
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:w-9/12
   [&::-webkit-scrollbar-track]:bg-neutral-tertiary
   [&::-webkit-scrollbar-thumb]:rounded-full
   [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]"
         >
-          <li className="flex  items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
-            <NavLink to={"/dashboard/new-campaign"} className={({isActive}) => isActive ? "text-primary" : ""}>
+          <li className="" onClick={() =>setIsReportsOptionsCollapse({
+            reports : true ,
+            buyAndPayment : true , 
+            messageTemplates : true
+          })}>
+            <NavLink
+              to={"/dashboard/new-campaign"}
+              className={({ isActive }) =>
+                `${
+                  isActive
+                    ? "text-primary border-neutral-primary"
+                    : "border-neutral-tertiary"
+                } block text-right px-4 border-[1.5px]   rounded-[5px] py-4`
+              }
+            >
               ایجاد کمپین جدید
             </NavLink>
           </li>
-          <li className=" flex  items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-primary px-4 rounded-[5px] ">
-            <NavLink to={"/dashboard/campagins"}  className={({isActive}) => isActive ? "text-primary" : ""}>
+          <li className="" onClick={() =>setIsReportsOptionsCollapse({
+            reports : true ,
+            buyAndPayment : true , 
+            messageTemplates : true
+          })}>
+            <NavLink
+              to={"/dashboard/campaigns"}
+              className={({ isActive }) =>
+                `${
+                  isActive
+                    ? "text-primary border-neutral-primary"
+                    : "border-neutral-tertiary"
+                } block text-right px-4 border-[1.5px]   rounded-[5px] py-4`
+              }
+            >
               کمپین ها
             </NavLink>
-          
           </li>
-              <li className="  lg:h-[71px] border-[1.5px] border-neutral-tertiary  rounded-[5px] ">
-            <button className="flex items-center justify-between w-full h-full px-4">
-            <img
-              src="/public/images/dashboard/sidebar-arrow.png"
-              alt="sidebar-arrow"
+          <li
+            className="    "
+            onClick={() =>
+              setIsReportsOptionsCollapse(i => ({messageTemplates : true , buyAndPayment : true , reports : !i.reports }))
+            }
+          >
+            <NavLink
+              to={"/dashboard/reports"}
+              className={({ isActive }) =>
+                `${
+                  isActive
+                    ? "text-primary border-neutral-primary"
+                    : "border-neutral-tertiary"
+                } flex items-center justify-between  px-4 border-[1.5px]   rounded-[5px] py-4`
+              }
+            >
+              <img
+                className={`transition duration-500 ${
+                  isReportsOptionsCollapse.reports ? "" : "rotate-180"
+                }`}
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
+                alt="sidebar-arrow"
               />
-              <span>گزارش ها</span>
-            </button>
-            <ul className="">
-              <li><NavLink to={""}></NavLink> </li>
-              <li><NavLink to={""}></NavLink> </li>
-              <li><NavLink to={""}></NavLink> </li>
-              <li><NavLink to={""}></NavLink> </li>
-
-            </ul>
-          
+              گزارش ها
+            </NavLink>
           </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+
+          <ul
+            className={`transition-all duration-500    border-neutral-tertiary ${
+              isReportsOptionsCollapse.reports
+                ? "max-h-0  invisible opacity-0"
+                : "max-h-[500px]  visible opacity-100 border-[1.5px]"
+            }`}
+          >
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports/all-campaigns"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
+                      : "border-r-neutral-tertiary text-gray-black"
+                  } block  p-3  !text-xl border-r-6 `
+                }
+              >
+                همه ی کمپین ها
+              </NavLink>
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports/active-campagins"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
+                      : "border-r-neutral-tertiary text-gray-black"
+                  } block  p-3  !text-xl border-r-6 `
+                }
+              >
+                فعال
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports/inactive-campagins"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
+                      : "border-r-neutral-tertiary text-gray-black"
+                  } block  p-3  !text-xl border-r-6 `
+                }
+              >
+                غیر فعال
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports/blocked-campagins"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary"
+                      : "border-r-neutral-tertiary text-gray-black"
+                  } block  p-3  !text-xl border-r-6 `
+                }
+              >
+                مسدود شده
+              </NavLink>{" "}
+            </li>
+          </ul>
+
+          <li className="flex items-center justify-between   border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
             <span>قالب های پیام</span>
             <img
-              src="/public/images/dashboard/sidebar-arrow.png"
+              src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
               alt="sidebar-arrow"
             />
           </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
+          <li className="flex items-center justify-between   border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
             <span>خرید و پرداخت</span>
             <img
-              src="/public/images/dashboard/sidebar-arrow.png"
+              src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
               alt="sidebar-arrow"
             />
           </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <NavLink to={""}>راهنما</NavLink>
+          <li className="    ">
+            <NavLink
+              to={"/dashboard/help"}
+              className={({ isActive }) =>
+                `${
+                  isActive
+                    ? "text-primary border-neutral-primary"
+                    : "border-neutral-tertiary"
+                } block text-right px-4 border-[1.5px]   rounded-[5px] py-4`
+              }
+            >
+              راهنما
+            </NavLink>
           </li>
-          <li className="flex items-center justify-between  lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <NavLink to={""}>خروج از حساب کاربری</NavLink>
+          <li className="    ">
+            <button
+              className={
+                "w-full border-neutral-tertiary block text-right px-4 border-[1.5px]   rounded-[5px] py-4"
+              }
+            >
+              خروج از حساب کاربری
+            </button>
           </li>
         </ul>
       </div>

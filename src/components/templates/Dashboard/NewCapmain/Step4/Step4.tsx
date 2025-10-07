@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 type Step4Props = {
   setErrorMessage: (value: string | null) => void;
   attachmentFiles: null | File[];
   setAttachmentFiles: (value: File[]) => void;
   uploadAttachmentFilePercent: number;
   setUploadAttachmentFilePercent: (value: number) => void;
-isUploadAttachmentReady : boolean;
-  
+  isUploadAttachmentReady: boolean;
 };
 let isDuplicateAttachmentFiles: boolean | undefined = false;
 function Step4({
@@ -16,7 +15,6 @@ function Step4({
   uploadAttachmentFilePercent,
   setUploadAttachmentFilePercent,
   isUploadAttachmentReady,
-
 }: Step4Props) {
   const handeFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setUploadAttachmentFilePercent(0);
@@ -68,9 +66,9 @@ function Step4({
     if (file.type.includes("pdf")) {
       return (
         <img
-          src="/images/dashboard/pdf.png"
+          src="/images/dashboard/new-campaign/pdf.png"
           alt="pdf"
-          className="max-sm:hidden"
+          className="max-sm:hidden size-12"
         />
       );
     }
@@ -81,9 +79,9 @@ function Step4({
     ) {
       return (
         <img
-          src="/images/dashboard/doc.png"
+          src="/images/dashboard/new-campaign/doc.png"
           alt="word"
-          className="max-sm:hidden"
+          className="max-sm:hidden size-12"
         />
       );
     }
@@ -94,18 +92,18 @@ function Step4({
     ) {
       return (
         <img
-          src="/images/dashboard/excel.png"
+          src="/images/dashboard/new-campaign/excel.png"
           alt="excel"
-          className="max-sm:hidden"
+          className="max-sm:hidden size-12"
         />
       );
     }
     if (file.type.startsWith("audio/")) {
       return (
         <img
-          src="/images/dashboard/voice.png"
+          src="/images/dashboard/new-campaign/voice.png"
           alt="voice"
-          className="max-sm:hidden"
+          className="max-sm:hidden size-12"
         />
       );
     }
@@ -195,13 +193,19 @@ function Step4({
           </label>
 
           <div className="divide-y-4 ">
-            {isUploadAttachmentReady && (
-              <div className={`grid ${uploadAttachmentFilePercent === 100 ? "grid-cols-[auto_50px]" : "grid-cols-[60px_auto_50px]"} items-center gap-3 mb-4 p-2`}>
+            {isUploadAttachmentReady && attachmentFiles?.length && (
+              <div
+                className={`grid ${
+                  uploadAttachmentFilePercent === 100
+                    ? "grid-cols-[auto_50px]"
+                    : "grid-cols-[60px_auto_50px]"
+                } items-center gap-3 mb-4 p-2`}
+              >
                 {uploadAttachmentFilePercent < 100 && (
                   <img
-                  src="../../../../../../public/images/dashboard/Loading.gif"
-                  alt="loading"
-                />
+                    src="../../../../../../public/images/dashboard/new-campaign/Loading.gif"
+                    alt="loading"
+                  />
                 )}
                 <div className="bg-[#c2a6a6] rounded-sm relative h-1">
                   <div
@@ -271,7 +275,7 @@ function Step4({
                     </svg>
                   </button>
                   <div className="flex flex-col gap-2">
-                    <div className="flex justify-between font-inter  ">
+                    <div className="flex justify-between font-inter  flex-wrap gap-2">
                       <span className="text-xs 2xl:text-base">{`${
                         file.size / 1000000
                       }Mb`}</span>

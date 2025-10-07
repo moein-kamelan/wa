@@ -6,8 +6,8 @@
 <path d="M467.942 100.679C453.528 103.436 438.554 107.364 424.413 111.837C295.364 152.692 180.875 254.895 133.557 387.285C84.7319 520.145 104.077 665.317 153.429 790.378C158.801 804.016 164.636 817.822 170.947 831.798C167.023 816.974 163.492 802.464 160.332 788.262C130.833 657.522 124.503 522.022 169.243 400.343C212.934 279.243 307.75 178.266 427.11 118.535C440.186 112.034 454.219 105.874 467.942 100.679Z" fill="#075E54" fill-opacity="0.88"/>
 </g>
 <defs>
-<filter id="filter0_g_89_144" x="120.332" y="94.8632" width="370.327" height="717.064" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_g_89_144" x="120.332" y="94.8632" width="370.327" height="717.064" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="0.0099999997764825821 0.0099999997764825821" numOctaves="3" seed="5358" />
 <feDisplacementMap in="shape" scale="0.2199999988079071" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
@@ -15,8 +15,8 @@
 <feMergeNode in="displacedImage"/>
 </feMerge>
 </filter>
-<filter id="filter1_g_89_144" x="5.2439" y="0.679443" width="562.698" height="931.119" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter1_g_89_144" x="5.2439" y="0.679443" width="562.698" height="931.119" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="0.20876826345920563 0.20876826345920563" numOctaves="3" seed="5358" />
 <feDisplacementMap in="shape" scale="200" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />

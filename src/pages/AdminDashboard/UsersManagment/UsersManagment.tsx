@@ -30,6 +30,7 @@ function UsersManagment() {
         className={`bg-secondary/35 inset-0 w-full h-full absolute z-20 transition-all duration-500 ${
           isModalOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
+        onClick={() => setIsModalOpen(false)}
       ></div>
       <AdminDashboardHeader>
         <span className="text-secondary text-[56px] text-shadow-[2px_4px_4px_rgb(255,255,255,0.75)]">
@@ -97,7 +98,7 @@ function UsersManagment() {
           </div>
         </div>
 
-        <div className="relative rounded-2xl grow  w-98/100 mx-auto overflow-hidden  shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)] z-50">
+        <div className="relative rounded-2xl grow  w-98/100 mx-auto overflow-hidden  shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)] z-50 max-h-[1100px]">
           {isModalOpen && (
             <div className=" flex flex-col h-full ">
               <div className="bg-gradient-to-l from-[#D9D9D9] to-[#075E54] ">
@@ -275,8 +276,8 @@ function UsersManagment() {
                 </div>
               )}
               {modalSection === "restrictions" && (
-                <div className="grow bg-white py-8 px-12 overflow-y-auto">
-                  <div className="flex flex-col gap-y-6">
+                <div className="grow bg-white py-7 px-12 overflow-y-auto">
+                  <div className="flex flex-col ">
                     <InputContainer
                       text="وضعیت حساب"
                       textSize="text-base lg:text-[40px]"

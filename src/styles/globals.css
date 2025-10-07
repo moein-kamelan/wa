@@ -5,9 +5,9 @@
   --color-primary: #25d366;
   --color-secondary: #075e54;
   --color-accent: #34b7f1;
-  --color-neutral-primary: #DCF8C6;
-  --color-neutral-secondary: #ECE5DD;
-  --color-neutral-tertiary: #D9d9d9;
+  --color-neutral-primary: #dcf8c6;
+  --color-neutral-secondary: #ece5dd;
+  --color-neutral-tertiary: #D9D9D9;
   --color-btn-primary-normal: #25d366;
   --color-btn-primary-hover: #29ef73;
   --color-btn-primary-tapped: #1da450;
@@ -28,17 +28,16 @@
 }
 
 @utility custom-btn {
-  @apply bg-primary text-white rounded-[55px] active:bg-btn-primary-tapped hover:bg-btn-primary-hover shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+  @apply bg-primary text-white rounded-[55px] active:bg-btn-primary-tapped hover:bg-btn-primary-hover shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)];
 }
 
 @utility shadow-normal {
-  @apply shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
+  @apply shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)];
 }
 
 @utility main-input {
-  @apply border-[1.5px] border-secondary rounded-[5px] text-secondary text-[32px] bg-neutral-primary/30 px-5 py-3  max-w-[263px] placeholder:text-neutral-tertiary
+  @apply border-[1.5px] border-secondary rounded-[5px] text-secondary text-[32px] bg-neutral-primary/30 px-5 py-3  max-w-[263px] placeholder:text-neutral-tertiary;
 }
-
 
 :root {
   direction: rtl;
@@ -65,7 +64,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  background: url("/frontend/public/images/dashboard/select-arrow.svg")
+  background: url("/frontend/public/images/dashboard/new-campaign/select-arrow.svg")
     no-repeat right 10px center;
   background-color: white;
   padding-right: 30px; /* جا برای فلش */
@@ -126,7 +125,7 @@ span.sd {
   @apply !text-4xl;
 }
 .weekend-day {
-  @apply text-semantic-error font-black;
+  @apply !text-semantic-error ;
 }
 
 .rmdp-day.rmdp-disabled span {
@@ -148,9 +147,12 @@ span.sd {
   @apply max-md:w-full w-auto;
 }
 
-
-td , th{
-  @apply text-nowrap
+.css-1u9des2-indicatorSeparator {
+  display: none;
 }
 
 
+td,
+th {
+  @apply text-nowrap;
+}

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Stepper from "../../../components/templates/Dashboard/NewCapmain/Stepper/Stepper";
 import Step1 from "../../../components/templates/Dashboard/NewCapmain/Step1/Step1";
 import StepMessage from "../../../components/modules/Dashboard/StepMessage/StepMessage";
@@ -9,7 +10,7 @@ import { VariableRandomValueType } from "../../../types/dashboard/types";
 import SmallStepper from "../../../components/modules/Dashboard/SmallStepper/SmallStepper";
 import Step4 from "../../../components/templates/Dashboard/NewCapmain/Step4/Step4";
 import { validateStep1, validateStep2 } from "../../../validators/validators";
-import Step5 from "../../../components/templates/Dashboard/NewCapmain/Step5/Step5";
+import Step5, { Step5Ref } from "../../../components/templates/Dashboard/NewCapmain/Step5/Step5";
 import Step6 from "../../../components/templates/Dashboard/NewCapmain/Step6/Step6";
 import Step7 from "../../../components/templates/Dashboard/NewCapmain/Step7/Step7";
 import { axiosInstance } from "../../../utils/axios";
@@ -17,10 +18,13 @@ import { getSessionStorage, setSessionStorage } from "../../../utils/helpers";
 import JSZip from "jszip";
 
 function NewCampaign() {
+  const [direction, setDirection] = useState<"next" | "back">("next");
+  console.log(direction);
+  
   const [message, setMessage] = useState(
     getSessionStorage("campaignMessageText") || ""
   );
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(5);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [successMessage, setSuccessMessage] = useState<null | string>(null);
   const [uploadMessage, setUploadMessage] = useState<null | string>(null);
@@ -45,6 +49,7 @@ function NewCampaign() {
     useState<number>(0);
   const [isUploadAttachmentReady, setIsUploadAttachmentReady] =
     useState<boolean>(false);
+const step5Ref = useRef<Step5Ref | null>(null);
 
   const [checkedVariables, setCheckedVaribale] = useState({
     firstName:
@@ -94,12 +99,11 @@ function NewCampaign() {
       setUploadMessage("در حال آپلود فایل ...");
 
       await axiosInstance.post(
-        "/api/campaigns/68da78982bacae83154b71f2/recipients",
+        "/api/campaigns/68da78cf2bacae83154b71f7/recipients",
         formData,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTMwMzgwOSwiZXhwIjoxNzYxODk1ODA5fQ.YGFBsk287SQvm0dw2l3npyeEXdic3nJbA8oVGPZ1lJA",
+             Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
             "Content-Type": "multipart/form-data",
           },
           onUploadProgress: (event) => {
@@ -129,6 +133,7 @@ function NewCampaign() {
   };
 
   const handleNextClick = async () => {
+      setDirection("next");
     if (step === 1) {
       try {
         const validationResult = validateStep1(
@@ -150,11 +155,10 @@ function NewCampaign() {
           {
             message,
           },
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTMwMzgwOSwiZXhwIjoxNzYxODk1ODA5fQ.YGFBsk287SQvm0dw2l3npyeEXdic3nJbA8oVGPZ1lJA`,
-            },
-          }
+          {headers : {
+              Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+          }}
+          
         );
 
         console.log("Campaign created successfully:", response.data);
@@ -220,11 +224,11 @@ function NewCampaign() {
         }
 
         const response = await axiosInstance.post(
-          "/api/campaigns/68da78982bacae83154b71f2/attachment",
+          "/api/campaigns/68da78cf2bacae83154b71f7/attachment/temp",
           formData,
           {
             headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTMwMzgwOSwiZXhwIjoxNzYxODk1ODA5fQ.YGFBsk287SQvm0dw2l3npyeEXdic3nJbA8oVGPZ1lJA`,
+   Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
               "Content-Type": "multipart/form-data",
             },
             onUploadProgress: (event) => {
@@ -250,7 +254,14 @@ function NewCampaign() {
         return;
       }
     } else if (step === 5) {
-      setStep((s) => s + 1);
+
+       if (step5Ref.current) {
+        await step5Ref.current.submitForm(); // ← فرم از بیرون سابمیت میشه
+        
+      }
+      
+      
+      
     } else if (step === 6) {
       setStep((s) => s + 1);
     }
@@ -258,13 +269,30 @@ function NewCampaign() {
 
   const handleSubmitClick = () => {};
 
+  const handleRemoveCampaignClick = async () => {
+    try {
+      const response = await axiosInstance.delete(
+        "/api/campaigns/68da78cf2bacae83154b71f7",
+        {
+          headers: {
+             Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+          },
+        }
+      );
+
+      console.log("deltedCampaign => ", response);
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
   return (
-    <div className="pb-5">
+    <div className="pb-5  ">
       <Stepper step={step} />
       <SmallStepper step={step} />
 
       <div className="pr-3 lg:pr-[22px]  w-full max-w-[93%]   ">
-        <div className="rounded-2xl bg-white md:h-[79.5vh] overflow-y-auto pb-9  md:pb-10  relative">
+        <div className="rounded-2xl bg-white md:h-[79.5vh] overflow-y-auto pb-9  md:pb-10  relative overflow-x-hidden">
           {errorMessage && (
             <StepMessage status="error">{errorMessage}</StepMessage>
           )}
@@ -283,45 +311,67 @@ function NewCampaign() {
                 ? "disabled:bg-transparent !text-gray-black !bg-neutral-tertiary border !border-gray-black   cursor-not-allowed"
                 : ""
             }`}
+            onClick={handleRemoveCampaignClick}
           >
             حذف کمپین
           </button>
 
-          {step === 1 && (
-            <Step1
-              message={message}
-              onMessageChange={setMessage}
-              checkedVariables={checkedVariables}
-              onChangeCheckedVariables={setCheckedVaribale}
-              variableRandomValue={variableRandomValue}
-            />
-          )}
-          {step === 2 && <Step2 />}
-          {step === 3 && (
-            <Step3
-              onFileChange={handleChangeFileInput}
-              uploadPercent={uploadPercent}
-              loadedData={loadedData}
-              totalData={totalData}
-              isUploadError={isUploadError}
-              fileName={fileName}
-              fileSize={fileSize}
-            />
-          )}
-          {step === 4 && (
-            <Step4
-              setErrorMessage={setErrorMessage}
-              attachmentFiles={attachmentFiles}
-              setAttachmentFiles={setAttachmentFiles}
-              uploadAttachmentFilePercent={uploadAttachmentFilePercent}
-              setUploadAttachmentFilePercent={setUploadAttachmentFilePercent}
-              isUploadAttachmentReady={isUploadAttachmentReady}
-              setIsUploadAttachmentReady={setIsUploadAttachmentReady}
-            />
-          )}
-          {step === 5 && <Step5 />}
-          {step === 6 && <Step6 />}
-          {step === 7 && <Step7 />}
+         <AnimatePresence mode="wait" initial={false}>
+<motion.div
+  key={step}
+  initial={{ x: direction === "next" ? -100 : 100, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  exit={{ x: direction === "back" ? 100 : -100, opacity: 0 }}
+  transition={{
+    duration: 0.15,
+     ease: [0.25, 0.8, 0.25, 1],
+  }}
+>
+    {step === 1 && (
+      <Step1
+        message={message}
+        onMessageChange={setMessage}
+        checkedVariables={checkedVariables}
+        onChangeCheckedVariables={setCheckedVaribale}
+        variableRandomValue={variableRandomValue}
+      />
+    )}
+    {step === 2 && <Step2 />}
+    {step === 3 && (
+      <Step3
+        onFileChange={handleChangeFileInput}
+        uploadPercent={uploadPercent}
+        loadedData={loadedData}
+        totalData={totalData}
+        isUploadError={isUploadError}
+        fileName={fileName}
+        fileSize={fileSize}
+      />
+    )}
+    {step === 4 && (
+      <Step4
+        setErrorMessage={setErrorMessage}
+        attachmentFiles={attachmentFiles}
+        setAttachmentFiles={setAttachmentFiles}
+        uploadAttachmentFilePercent={uploadAttachmentFilePercent}
+        setUploadAttachmentFilePercent={setUploadAttachmentFilePercent}
+        isUploadAttachmentReady={isUploadAttachmentReady}
+      />
+    )}
+    {step === 5 && (
+      <Step5
+        ref={step5Ref}
+        onSubmit={(values) => {
+          console.log("Step5 values:", values);
+          setStep((s) => s + 1);
+        }}
+      />
+    )}
+    {step === 6 && <Step6 />}
+    {step === 7 && <Step7 />}
+  </motion.div>
+</AnimatePresence>
+
         </div>
 
         <StepButtons
@@ -330,6 +380,7 @@ function NewCampaign() {
           onNextClick={handleNextClick}
           onSubmitClick={handleSubmitClick}
           setStep={setStep}
+          setDirection={setDirection}
         />
       </div>
     </div>

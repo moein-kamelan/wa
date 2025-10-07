@@ -9,10 +9,10 @@ type MobileSidebarPropse = {
 function MobileSidebar({ isOpenSidebar, onOpenSidebar }: MobileSidebarPropse) {
   return (
     <div
-      className={`lg:hidden overflow-y-auto flex-col w-[77px]  tablet:w-[177px] min-w-[110px] max-w-[177px] grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${
+      className={`lg:hidden overflow-y-auto flex-col max-w-[77px]  tablet:max-w-[177px] min-w-[110px]  grow bg-white shrink-0 z-20 transition-all duration-200 ease-in-out ${
         isOpenSidebar
-          ? "fixed bottom-0 top-0 w-[300px]  sm:w-[361px] lg:hidden max-w-none"
-          : ""
+          ? "fixed bottom-0 top-0 max-w-[300px]  sm:max-w-[361px] lg:hidden "
+          : "max-w-0"
       }`}
     >
       <button
@@ -54,7 +54,7 @@ function MobileSidebar({ isOpenSidebar, onOpenSidebar }: MobileSidebarPropse) {
       >
         <div className="h-[38.8%]   w-full lg:max-w-[384px] relative">
           <img
-            src="/public/images/dashboard/sidebar-shape.png"
+            src="/public/images/dashboard/new-campaign/sidebar-shape.png"
             alt="sidebar-shape"
             className="h-full w-full"
           />
@@ -102,28 +102,28 @@ function MobileSidebar({ isOpenSidebar, onOpenSidebar }: MobileSidebarPropse) {
             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
               <span>کمپین ها</span>
               <img
-                src="/public/images/dashboard/sidebar-arrow.png"
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
                 alt="sidebar-arrow"
               />
             </li>
             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
               <span>گزارش ها</span>
               <img
-                src="/public/images/dashboard/sidebar-arrow.png"
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
                 alt="sidebar-arrow"
               />
             </li>
             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
               <span>قالب های پیام</span>
               <img
-                src="/public/images/dashboard/sidebar-arrow.png"
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
                 alt="sidebar-arrow"
               />
             </li>
             <li className="flex items-center justify-between  h-[66px] lg:h-[71px] border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
               <span>خرید و پرداخت</span>
               <img
-                src="/public/images/dashboard/sidebar-arrow.png"
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
                 alt="sidebar-arrow"
               />
             </li>

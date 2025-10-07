@@ -1,4 +1,5 @@
 import React from "react";
+import { axiosInstance } from "../../../../utils/axios";
 
 type StepButtonsProps = {
   isFirstStep: boolean;
@@ -6,6 +7,7 @@ type StepButtonsProps = {
   onSubmitClick: () => void;
   onNextClick: () => void;
   setStep: (s: any) => void;
+  setDirection : (value : "next" | "back") => void
 };
 
 function StepButtons({
@@ -14,7 +16,26 @@ function StepButtons({
   onSubmitClick,
   onNextClick,
   setStep,
+  setDirection
 }: StepButtonsProps) {
+  const handlePrevStepClick = async () => {
+    try {
+       await axiosInstance.post(
+        "/api/campaigns/68da78cf2bacae83154b71f7/go-back",undefined , 
+        {headers : {
+          Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+        }
+        }
+
+        
+      );
+      setDirection("back")
+      setStep((s: any) => s - 1);
+    } catch (error) {
+      console.error("error for navigate to back step =>", error);
+    }
+  };
+
   return (
     <div className="flex items-center justify-between  flex-wrap gap-4   mt-3.5 lg:mt-4">
       <button
@@ -24,7 +45,7 @@ function StepButtons({
             ? "disabled:bg-transparent !text-gray-black !border-gray-black   cursor-not-allowed"
             : ""
         }`}
-        onClick={() => setStep((s: any) => s - 1)}
+        onClick={handlePrevStepClick}
       >
         قبلی
       </button>
