@@ -10,6 +10,7 @@ import Register from "./pages/Auth/Register/Register";
 
 import Reports from "./pages/Dashboard/Reports/Reports";
 const routes = createBrowserRouter([
+  {path: "/" , element: <Navigate to={"/dashboard/new-campaign"} replace/>},
   {
     path: "/dashboard/*",
     element: <Dashboard />,

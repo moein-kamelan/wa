@@ -22,7 +22,7 @@ interface Step5Values {
 }
 
 interface Step5Props {
- onSubmit?: (values: Step5Values, isSuccess?: boolean) => void;
+  onSubmit?: (values: Step5Values, isSuccess?: boolean) => void;
 }
 
 export interface Step5Ref {
@@ -72,13 +72,11 @@ const Step5 = forwardRef<Step5Ref, Step5Props>(({ onSubmit }, ref) => {
           interval: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={ async (values, helpers) => {
+        onSubmit={async (values, helpers) => {
           try {
-            
             const gregorianDate = values.date?.toDate?.() || new Date();
             gregorianDate.setHours(Number(values.hour));
             gregorianDate.setMinutes(Number(values.minute));
-
 
             const payload = {
               interval: values.interval,
@@ -87,17 +85,18 @@ const Step5 = forwardRef<Step5Ref, Step5Props>(({ onSubmit }, ref) => {
               timezone: "Asia/Tehran",
             };
 
-            const response = await axiosInstance.put("/api/campaigns/68da78cf2bacae83154b71f7/interval" , payload , {
-              headers : {
-                Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+            const response = await axiosInstance.put(
+              "/api/campaigns/68e61f5b9c887771c55f86ff/interval",
+              payload,
+              {
+                headers: {
+                  Authorization:
+                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
+                },
               }
-            })
-            console.log("response" , response) ;
-            onSubmit?.(values , true);
-            
-            
-            
-            
+            );
+            console.log("response", response);
+            onSubmit?.(values, true);
 
             helpers.setSubmitting(false);
           } catch (error) {
@@ -180,11 +179,11 @@ const Step5 = forwardRef<Step5Ref, Step5Props>(({ onSubmit }, ref) => {
                     ? "bg-semantic-error/44"
                     : ""
                 }
-         errorMessage1={
-  formik.touched.date && formik.errors.date
-    ? String(formik.errors.date)
-    : null
-}
+                errorMessage1={
+                  formik.touched.date && formik.errors.date
+                    ? String(formik.errors.date)
+                    : null
+                }
               >
                 <DatePicker
                   calendar={persian}
@@ -206,10 +205,18 @@ const Step5 = forwardRef<Step5Ref, Step5Props>(({ onSubmit }, ref) => {
                   render={(valueString, openCalendar) => (
                     <div
                       onClick={openCalendar}
-                      className={`flex  items-center justify-between   cursor-pointer border-2 border-secondary  px-5 py-2 bg-neutral-primary/30  rounded-[5px] ${(formik.touched.date && formik.errors.date) ? "bg-semantic-error/30  border-semantic-error " : ""}`}
+                      className={`flex  items-center justify-between   cursor-pointer border-2 border-secondary  px-5 py-2 bg-neutral-primary/30  rounded-[5px] ${
+                        formik.touched.date && formik.errors.date
+                          ? "bg-semantic-error/30  border-semantic-error "
+                          : ""
+                      }`}
                     >
                       <svg
-                        className={`shrink-0 size-8 md:size-11 !text-primary ${(formik.touched.date && formik.errors.date) ? "!text-semantic-error" : ""}`}
+                        className={`shrink-0 size-8 md:size-11 !text-primary ${
+                          formik.touched.date && formik.errors.date
+                            ? "!text-semantic-error"
+                            : ""
+                        }`}
                         viewBox="0 0 45 45"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"

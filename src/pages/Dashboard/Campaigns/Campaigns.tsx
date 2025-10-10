@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { axiosInstance } from "../../../utils/axios";
+import useCampaigns from "../../../hooks/useCampaigns";
 
 function Campaigns() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [campaigns, setCampaigns] = useState<any[] | null>(null);
-  const [pagination, setPagination] = useState<any>(null);
+  // const [campaigns, setCampaigns] = useState<any[] | null>(null);
+  // const [pagination, setPagination] = useState<any>(null);
 
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || 7;
-  useEffect(() => {
-    try {
-      const fetchCampaigns = async () => {
-        const response = await axiosInstance.get(
-          `/api/campaigns?page=${page}&limit=${limit}`,
-          {
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
-            },
-          }
-        );
-        console.log("response:", response);
 
-        setCampaigns(response.data.campaigns);
-        setPagination(response.data.pagination);
-      };
+  const {data } = useCampaigns(page , limit)
+  const pagination = data?.pagination
+  
+  // useEffect(() => {
+  //   try {
+  //     const fetchCampaigns = async () => {
+  //       const response = await axiosInstance.get(
+  //         `/api/campaigns?page=${page}&limit=${limit}`,
+  //         {
+  //           headers: {
+  //             Authorization:
+  //               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
+  //           },
+  //         }
+  //       );
+  //       console.log("response:", response);
 
-      fetchCampaigns();
-    } catch (error) {
-      console.log("error in fetching campaigns data", error);
-    }
-  }, [page, limit]);
+  //       setCampaigns(response.data.campaigns);
+  //       setPagination(response.data.pagination);
+  //     };
+
+  //     fetchCampaigns();
+  //   } catch (error) {
+  //     console.log("error in fetching campaigns data", error);
+  //   }
+  // }, [page, limit]);
 
   const handleBackPageClick = () => {
     if (page > 1)
@@ -102,7 +106,7 @@ function Campaigns() {
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-auto">
+    <div className="flex flex-col h-screen ">
       <div className="flex items-center justify-between pr-3 pl-11.5 mb-[92px] shrink-0">
         <div className="relative">
           <svg
@@ -178,12 +182,12 @@ function Campaigns() {
   [&::-webkit-scrollbar-thumb]:rounded-full
   [&::-webkit-scrollbar-thumb]:bg-[#1DA45070]"
         >
-          {campaigns?.map((campaign: any) => (
+          {data?.campaigns?.map((campaign: any) => (
             <div
               key={campaign._id}
               className="bg-white px-10.5 py-[21px] grid grid-cols-[60px_1fr_1fr_1fr_24px] items-center justify-center rounded-tl-[6px] rounded-tr-[6px] text-2xl shadow-[2px_-4px_4px_0px_rgba(0,0,0,0.25)]"
             >
-              <span>تست</span>
+              <span>{campaign.title}</span>
               <div className="flex items-center justify-center gap-x-1.5">
                 <svg
                   width="24"

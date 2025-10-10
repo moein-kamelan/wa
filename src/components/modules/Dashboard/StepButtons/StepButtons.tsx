@@ -7,7 +7,7 @@ type StepButtonsProps = {
   onSubmitClick: () => void;
   onNextClick: () => void;
   setStep: (s: any) => void;
-  setDirection : (value : "next" | "back") => void
+  setDirection: (value: "next" | "back") => void;
 };
 
 function StepButtons({
@@ -16,20 +16,21 @@ function StepButtons({
   onSubmitClick,
   onNextClick,
   setStep,
-  setDirection
+  setDirection,
 }: StepButtonsProps) {
   const handlePrevStepClick = async () => {
     try {
-       await axiosInstance.post(
-        "/api/campaigns/68da78cf2bacae83154b71f7/go-back",undefined , 
-        {headers : {
-          Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw"
+      await axiosInstance.post(
+        "/api/campaigns/68e61f5b9c887771c55f86ff/go-back",
+        undefined,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
+          },
         }
-        }
-
-        
       );
-      setDirection("back")
+      setDirection("back");
       setStep((s: any) => s - 1);
     } catch (error) {
       console.error("error for navigate to back step =>", error);

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { UIMatch, useMatches, useSearchParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import ReportsHeader from "../../../components/modules/Dashboard/Reports/ReporstsHeader/ReportsHeader";
 import Select, { components } from "react-select";
 import qs from "qs";
@@ -8,7 +8,6 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import axios from "axios";
 import { axiosInstance } from "../../../utils/axios";
-import { param } from "jquery";
 
 const options = [
   { value: "متعادل", label: "کند: 20 ثانیه" },
@@ -21,25 +20,27 @@ function Reports() {
   const [campaigns, setCampaigns] = useState<any[] | null>(null);
   const [pagination, setPagination] = useState<any>();
   const [date, setDate] = useState<any>(null);
-  const title = calculateTitle(searchParams.get("status"));
+  const [title, setTitle] = useState<string>("");
+  const headerTitle = calculateTitle(searchParams.get("status"));
 
   const page = Number(searchParams.get("page")) || 1;
-  
+  const startDate = searchParams.get("startDate") 
 
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
-
         const mainStatus = calculateStatus(searchParams.get("status"));
         const response = await axiosInstance.get(`/api/campaigns`, {
           params: {
             page,
             limit: 6,
-            status : mainStatus
+            status: mainStatus,
+            title,
+            startDate,
           },
-          paramsSerializer: function (params) {  
-      return qs.stringify(params, { arrayFormat: "repeat" });  
-    },
+          paramsSerializer: function (params) {
+            return qs.stringify(params, { arrayFormat: "repeat" });
+          },
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDU2MDYxNmFlMjU1MTNlN2MzNDIxNyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTczMzA5MCwiZXhwIjoxNzYyMzI1MDkwfQ.K7UOKvIDtJI3QhN_wdg-rl2BTAWOyeoYv3DXcqIHofw",
@@ -54,7 +55,7 @@ function Reports() {
       }
     };
     fetchCampaigns();
-  }, [page , searchParams]);
+  }, [page, searchParams, title , startDate]);
 
   const radius = 46;
   const circumference = 2 * Math.PI * radius;
@@ -111,7 +112,7 @@ function Reports() {
   return (
     <div className="flex flex-col min-h-screen relative ">
       <div className="inset-0 w-full h-screen bg-secondary/35 absolute z-10 hidden"></div>
-      <ReportsHeader title={title} />
+      <ReportsHeader title={headerTitle} />
       <div className="flex flex-col  bg-white mx-16 grow mb-12.5 rounded-2xl shadow-[1px_2px_5px_0px_rgba(0,0,0,0.25)] pt-4.5 px-8 gap-y-3.5">
         <div className="grow pb-4 rounded-[20px] flex flex-col">
           {/* <div>
@@ -476,6 +477,8 @@ function Reports() {
 
               <input
                 type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className="text-xl   text-gray-black placeholder:text-neutral-tertiary pl-2 "
                 placeholder="جستجوی کمپین"
               />
@@ -483,8 +486,22 @@ function Reports() {
 
             <DatePicker
               value={date}
-              onChange={(date) => {
-                setDate(date);
+              highlightToday={false}
+              onChange={(dateObject) => {
+                if (!dateObject) return;
+
+                const startDate = dateObject.toDate().setHours(0, 0, 0, 0);
+                const endDate = dateObject.toDate().setHours(23, 59, 59, 999);
+
+                const startISO = new Date(startDate).toISOString();
+                const endISO = new Date(endDate).toISOString();
+
+                setSearchParams(prev => {
+                  const params = new URLSearchParams(prev)
+                  params.set("startDate" , startISO)
+                  params.set("endDate" , endISO)
+                  return params
+                });
               }}
               calendar={persian}
               locale={persian_fa}
@@ -600,14 +617,14 @@ function Reports() {
           </div>
           <div className="flex flex-col w-full grow">
             <div
-              className="grow max-h-[523px]    overflow-y-auto overflow-x-auto [&::-webkit-scrollbar]:w-3
+              className="grow max-h-[562px]    overflow-y-auto overflow-x-auto [&::-webkit-scrollbar]:w-3
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:w-9/12
   [&::-webkit-scrollbar-track]:bg-neutral-tertiary
   [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-[#1DA45070] pl-2 pb-4 "
+  [&::-webkit-scrollbar-thumb]:bg-[#1DA45070] pl-2 pb-3 "
             >
-              <div className="relative  max-[1335px]:w-fit rounded-2xl border-[3px] border-secondary     overflow-hidden">
+              <div className="relative  max-[1370px]:w-fit rounded-2xl border-[3px] border-secondary     overflow-hidden">
                 <table className="  w-full border-collapse text-center table-auto ">
                   <thead className="bg-neutral-primary/80 text-gray-black *:font-B-Nazanin xl:text-2xl 2xl:text-[32px] text-nowrap border-b-[3px] border-secondary">
                     <tr>
@@ -744,7 +761,7 @@ function Reports() {
                           </label>
                         </td>
                         <td className="border border-secondary py-2.5 px-3 lg:text-2xl">
-                          admin
+                          {campaign.title}
                         </td>
                         <td className="border border-secondary py-2.5 px-3 lg:text-2xl">
                           {campaign?.progress.sent} / {campaign?.progress.total}

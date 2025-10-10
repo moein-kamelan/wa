@@ -12,12 +12,12 @@ function Sidebar() {
 
     const location = useLocation()
 
-    const isActiveLink = (status : string) => location.pathname === "/dashboard/reports" && location.search === `?status=${status}`
+    const isActiveLink = (status : string) => location.pathname === "/dashboard/reports" && location.search.includes(`?status=${status}`)
     
 
   return (
     <div className="lg:flex hidden flex-col shrink-0 xl:max-w-[344px] 2xl:max-w-[386px]  max-h-screen overflow-y-auto">
-      <div className="h-[38.8%] max-h-[440px]  lg:min-w-full- relative min-h-[300px]">
+      <div className="h-[38.8%] max-h-[440px]  lg:min-w-full- relative min-h-[300px] shrink-0">
         <img
           src="/public/images/dashboard/new-campaign/sidebar-shape.png"
           alt="sidebar-shape"
@@ -50,9 +50,9 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="transition-all duration-500 mt-[23px] mx-auto w-full px-8 **:lg:text-[26px] xl:**:text-3xl">
+      <div className="transition-all grow duration-500 mt-[23px] mx-auto w-full px-8 **:lg:text-[26px] xl:**:text-3xl">
         <ul
-          className="   flex flex-col overflow-y-auto pr-2 lg:max-h-[497px]  [direction:ltr]  *:flex-row-reverse   [&::-webkit-scrollbar]:w-3
+          className="    pr-2   max-h-[490px] overflow-y-auto [direction:ltr]  *:flex-row-reverse   [&::-webkit-scrollbar]:w-3
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:w-9/12
   [&::-webkit-scrollbar-track]:bg-neutral-tertiary
@@ -98,7 +98,7 @@ function Sidebar() {
           <li
             className="    "
             onClick={() =>
-              setIsReportsOptionsCollapse(i => ({messageTemplates : true , buyAndPayment : true , reports : !i.reports }))
+              setIsReportsOptionsCollapse(prev => ({messageTemplates : true , buyAndPayment : true , reports : !prev.reports }))
             }
           >
             <NavLink
@@ -118,7 +118,7 @@ function Sidebar() {
           </li>
 
           <ul
-            className={`transition-all duration-500    border-neutral-tertiary ${
+            className={`transition-all duration-500  overflow-hidden  border-neutral-tertiary ${
               isReportsOptionsCollapse.reports
                 ? "max-h-0  invisible opacity-0"
                 : "max-h-[500px]  visible opacity-100 border-[1.5px]"
@@ -161,20 +161,140 @@ function Sidebar() {
             </li>
           </ul>
 
-          <li className="flex items-center justify-between   border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>قالب های پیام</span>
-            <img
-              src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
-              alt="sidebar-arrow"
-            />
+          <li
+            className="    "
+            onClick={() =>
+              setIsReportsOptionsCollapse(prev => ({messageTemplates : !prev.reports , buyAndPayment : true , reports : true }))
+            }
+          >
+            <NavLink
+              to={"/dashboard/messageTemplates"}
+
+              className={`flex items-center justify-between  px-4 border-[1.5px]   rounded-[5px] py-4 ${isActiveLink("test") ? "text-primary border-neutral-primary" : "border-neutral-tertiary"}`}
+            >
+              <img
+                className={`transition duration-500 ${
+                  isReportsOptionsCollapse.messageTemplates ? "" : "rotate-180"
+                }`}
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+              قالب های پیام
+            </NavLink>
           </li>
-          <li className="flex items-center justify-between   border-[1.5px] border-neutral-tertiary px-4 rounded-[5px] ">
-            <span>خرید و پرداخت</span>
-            <img
-              src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
-              alt="sidebar-arrow"
-            />
+
+           <ul
+            className={`transition-all duration-500  overflow-hidden  border-neutral-tertiary ${
+              isReportsOptionsCollapse.messageTemplates
+                ? "max-h-0  invisible opacity-0"
+                : "max-h-[500px]  visible opacity-100 border-[1.5px]"
+            }`}
+          >
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports?status=all"}
+
+                className={`block  p-3  !text-xl border-r-6 ${isActiveLink("all") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+                
+           
+              >
+                تستی
+              </NavLink>
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports?status=active"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("active") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports?status=inactive"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("inactive") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/reports?status=blocked"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("blocked") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+          </ul>
+          
+          
+          <li
+            className="    "
+            onClick={() =>
+              setIsReportsOptionsCollapse(prev => ({messageTemplates : true , buyAndPayment : !prev.buyAndPayment , reports : true }))
+            }
+          >
+            <NavLink
+              to={"/dashboard/buyAndPayment"}
+
+              className={`flex items-center justify-between  px-4 border-[1.5px]   rounded-[5px] py-4 ${isActiveLink("test") ? "text-primary border-neutral-primary" : "border-neutral-tertiary"}`}
+            >
+              <img
+                className={`transition duration-500 ${
+                  isReportsOptionsCollapse.buyAndPayment ? "" : "rotate-180"
+                }`}
+                src="/public/images/dashboard/new-campaign/sidebar-arrow.png"
+                alt="sidebar-arrow"
+              />
+              خرید و پرداخت
+            </NavLink>
           </li>
+
+           <ul
+            className={`transition-all duration-500  overflow-hidden  border-neutral-tertiary ${
+              isReportsOptionsCollapse.buyAndPayment
+                ? "max-h-0  invisible opacity-0"
+                : "max-h-[500px]  visible opacity-100 border-[1.5px]"
+            }`}
+          >
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/"}
+
+                className={`block  p-3  !text-xl border-r-6 ${isActiveLink("all") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+                
+           
+              >
+                تستی
+              </NavLink>
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("active") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("inactive") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+            <li className="w-full text-right">
+              <NavLink
+                to={"/dashboard/"}
+                               className={`block  p-3  !text-xl border-r-6 ${isActiveLink("blocked") ? "border-r-{rgba(29, 164, 80, 0.44)} bg-neutral-primary text-secondary" : "border-r-neutral-tertiary text-gray-black"}`}
+              >
+                تستی
+              </NavLink>{" "}
+            </li>
+          </ul>
+          
+          
           <li className="    ">
             <NavLink
               to={"/dashboard/help"}
